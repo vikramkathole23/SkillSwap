@@ -59,11 +59,13 @@ cd skillswap
 Backend
 
 cd backend
+
 npm install
 
 Frontend
 
 cd frontend
+
 npm install
 
 3️⃣ Setup Environment Variables
