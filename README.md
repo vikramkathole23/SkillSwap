@@ -50,7 +50,7 @@ Backend
 
 1️⃣ Clone the Repo
 
-git clone https://github.com/your-username/skillswap.git
+git clone https://github.com/vikramkathole23/SkillSwap.git
 
 cd skillswap
 
