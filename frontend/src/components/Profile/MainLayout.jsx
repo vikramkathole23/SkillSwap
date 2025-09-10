@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 
 export default function MainLayout() {
-  const [selectedlink, setselectedlink] = useState(0);
+  const [selectedlink, setselectedlink] = useState(1);
 
   const handleSelectlink = (idx) => {
     setselectedlink(idx);

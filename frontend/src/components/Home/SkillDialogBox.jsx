@@ -25,6 +25,15 @@ function SkillDialogBox({ handleClose, isOpen, data }) {
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={isOpen}
+           PaperProps={{
+        sx: {
+          background: "linear-gradient(135deg, #1f1c2c, #928DAB)", // gradient bg
+          color: "#fff",
+          borderRadius: "20px",
+          boxShadow: "0px 8px 30px rgba(0,0,0,0.5)",
+          padding: "10px",
+        },
+      }}
         >
           <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
             <h1 className="text-2xl mb-2 cursor-pointer">{data.skillName}</h1>
@@ -47,15 +56,6 @@ function SkillDialogBox({ handleClose, isOpen, data }) {
                 <div className="inner-container flex justify-between ">
                   <div className="description ">
                     <div className="flex text-center username mb-2">
-                      <span className="cursor-pointer">
-                        <p>
-                          <Avatar
-                            sx={{ width: 30, height: 30 }}
-                            alt="Remy Sharp"
-                            src="/static/images/avatar/1.jpg"
-                          />
-                        </p>
-                      </span>
                       <span className="text-center ml-2 cursor-pointer hover:text-red-700">
                         {" "}
                         {data.username}
@@ -65,6 +65,8 @@ function SkillDialogBox({ handleClose, isOpen, data }) {
                       {data.skillName}
                     </h1>
                     <p>{data.description}</p>
+                    <p className="text-black">Profession:{data.profession}</p>
+                    <p>Proficiency:{data.proficiency}</p>
                     <div className="mt-[20px]">
                       <button className="box-btn px-4 py-1">
                         Request Swap

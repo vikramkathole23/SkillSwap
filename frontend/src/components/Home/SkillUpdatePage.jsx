@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { replace, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SkillDialogBox from "./SkillDialogBox";
+import toast from "react-hot-toast";
 
 function SkillUpdatePage() {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ function SkillUpdatePage() {
       );
       // redirect when skill is updated successfully
       navigate("/home", { state: { msg: "Skill updated successfully! 🎉" }, replace: true });
+      toast.success("Skill Updated successfully!");
     } catch (error) {
       console.log("Request URL:", error.config.url);
       console.log("HTTP Method:", error.config.method);
@@ -52,7 +54,7 @@ function SkillUpdatePage() {
     }
   };
 
-  
+
   return (
     <>
       <div class="min-h-screen  py-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center px-4">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import toast from "react-hot-toast";
 
 
 function AddNewSkill() {
@@ -29,6 +29,7 @@ function AddNewSkill() {
         const userData= await axios.post('http://localhost:3000/skill/newskill',formData)
         console.log(userData);
         navigate("/home", { state: { msg: "Skill updated successfully! 🎉" }, replace: true });
+        toast.success("Skill Updated successfully!");
       } catch (error) {
         console.log("new post request:",error);
         

@@ -7,7 +7,7 @@ const UserSchema=new Schema({
         type:String,
         required:true,
      },
-    userName:{
+    password:{
         type:String,
         required:true,
     },
@@ -16,16 +16,16 @@ const UserSchema=new Schema({
         required:true,
         unique:true
     },
-    bio:{
-        type:String,
+    // bio:{
+    //     type:String,
 
-    },
-    location:{
-        type:String,
-    },
-    profile_pic:{
-        type:String,
-    }
+    // },
+    // location:{
+    //     type:String,
+    // },
+    // profile_pic:{
+    //     type:String,
+    // }
 },{timestamps:true})
 
 export default UserSchema;
