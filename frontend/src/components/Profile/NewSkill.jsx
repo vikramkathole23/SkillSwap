@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCookies,useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -6,14 +6,15 @@ import toast from "react-hot-toast";
 
 function AddNewSkill() {
     const navigate=useNavigate();
-     const [formData,setFormData]=useState({
-       skillName:'',
-       image:'',
-       description:'',
-       profession:'',
-       proficiency:'',
-       category:'',
-       
+    const user = JSON.parse(localStorage.getItem("user"));
+    const [formData,setFormData]=useState({
+      skillName:'',
+      image:'',
+      description:'',
+      profession:'',
+      proficiency:'',
+      category:'',
+      user:user._id
      })
      
      const handleChange=(e)=>{

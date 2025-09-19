@@ -9,6 +9,7 @@ import Rating from '@mui/material/Rating';
 
 function UserProfileDetail() {
   const [value, setValue] = React.useState("1");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -24,7 +25,7 @@ function UserProfileDetail() {
       src="/static/images/avatar/2.jpg"
       sx={{ width: 100, height: 100 }}
     />
-    <h1 className="text-2xl font-semibold mt-2">Olivia Carter</h1>
+    <h1 className="text-2xl font-semibold mt-2">{user.fullName}</h1>
     <p className="text-gray-400">Software Engineer</p>
     <p className="text-gray-500 text-sm">Joined in 2021</p>
     <button className="mt-3 px-5 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition duration-300">

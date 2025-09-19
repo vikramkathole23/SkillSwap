@@ -11,6 +11,7 @@ import { typographyClasses } from "@mui/material/Typography";
 import toast from "react-hot-toast";
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import skill from "../../../../backend/models/skill.model";
 
 
 function SkillBox({ data ,sceleton  }){
@@ -33,7 +34,6 @@ function SkillBox({ data ,sceleton  }){
     try {
       const res = await axios.get(`http://localhost:3000/skill/${data._id}`);
       setskillData(res.data)
-      console.log(res.data);
     } catch (error) {
       console.error(error);
     }
@@ -42,13 +42,14 @@ function SkillBox({ data ,sceleton  }){
 const deleteSkill = async () => {
   try {
     const res = await axios.delete(`http://localhost:3000/skill/${data._id}`);
-    console.log(res.data);
+    console.log(data._id);
     navigate("/home", { state: { msg: "Skill updated successfully! 🎉" }, replace: true });
     toast.success("Skill Deleted successfully!");
   } catch (error) {
     console.log("deletion error:",error)
   }
 }
+
 
   return (
     <>
@@ -61,18 +62,20 @@ const deleteSkill = async () => {
               <div className="flex text-center username mb-2">
                 <span className="cursor-pointer">
                   <p>
-                    <Link to={`/home/:${data._id}`}>
+                   
+                    <Link to={`/home/user/${data.user?._id}`}>
                       <Avatar
                         sx={{ width: 30, height: 30 }}
-                        alt="Remy Sharp"
+                        alt={skillData.user?.fullName}
                         src="/static/images/avatar/1.jpg"
                       />
                     </Link>
+                    
                   </p>
                 </span>
                 <span className="text-center ml-2 cursor-pointer hover:text-red-700">
                   {" "}
-                  {data.username || <Skeleton count={10} />}
+                  {data.user?.fullName || <Skeleton count={10} />}
                 </span>
               </div>
               <h1 onClick={()=>{fetchSkill();handleClickOpen();}} className="text-2xl mb-2 cursor-pointer">{data.skillName}</h1>

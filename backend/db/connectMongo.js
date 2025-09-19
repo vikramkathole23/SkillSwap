@@ -1,12 +1,19 @@
 import  mongoose  from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 export const ConnectDB = async ()=>{
   try {
-    mongoose.connect('mongodb://localhost:27017/SkillSwap')
-    .then(() => console.log('Connected!'));
+    console.log(process.env.MONGO_URL);
+    
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log("MongoDB connected!");
   } catch (error) {
     console.log(error);
-    
   }
 }
   

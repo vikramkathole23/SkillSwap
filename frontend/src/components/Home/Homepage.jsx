@@ -1,6 +1,8 @@
 import React from 'react';
 import SkillBox from './SkillBox';
 import { useEffect,useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import axios from 'axios';
 
 
@@ -8,18 +10,45 @@ import axios from 'axios';
 function HomePage() {
   const [data, setData] = useState([]);
   const [sceleton,setSceleton]=useState("false")
+  const navigate=useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  
+  // useEffect(() => {
+  //   const verifyCookie = async () => {
+  //     if (!cookies.token) {
+  //       navigate("/login");
+  //     }
+  //     const { data } = await axios.post(
+  //       "http://localhost:3000",
+  //       {},
+  //       { withCredentials: true }
+  //     );
+  //     const { status, user } = data;
+  //     setUsername(user);
+  //     return status
+  //       ? toast(`Hello ${user}`, {
+  //           position: "top-right",
+  //         })
+  //       : (removeCookie("token"), navigate("/login"));
+  //   };
+  //   verifyCookie();
+  // }, [cookies, navigate, removeCookie]);
+  // const Logout = () => {
+  //   removeCookie("token");
+  //   navigate("/signup");
+  // };
   
   useEffect(() => {
   const fetchData = async () => {
     try {
       const res = await axios.get("http://localhost:3000/skill");
       setData(res.data);
+      console.log(res.data);      
       setSceleton("true")
     } catch (err) {
       console.error("Error fetching skills:", err);
     }
   };
-
   fetchData();
   }, []);
 

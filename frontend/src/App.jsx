@@ -27,6 +27,8 @@ function App() {
         <Route path="/addnewskill" element={<AddNewSkill />} />
         <Route path="/home/:id" element={<UserProfile />} />
         <Route path="/skill/:id/update" element={<SkillUpdatePage />} />
+        <Route path="/home/user/:id" element={<UserProfile />} />
+
         {/* <Route path="/skill/:id/updatepage" element={<SkillUpdatePage/>} /> */}
 
         {/* Main layout with nested routes */}
