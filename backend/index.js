@@ -1,21 +1,27 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import express from "express";
 import { ConnectDB } from "./db/connectMongo.js";
-import User from "./models/user.model.js";
-import skill from "./models/skill.model.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
-import mongoose from "mongoose";
+import skillRouter from "./routes/skill.routes.js";
+import userRouter from "./routes/user.routes.js"
+import passport from "passport";
+import LocalStrategy from "passport-local"
+import User from "./models/user.model.js";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+// import mongoose from "mongoose";
 
-const Port = 3000;
+const Port = process.env.PORT;
 const app = express();
 const upload = multer({ dest: "uploads/" });
 
-app.use(bodyParser.json());
-app.use(express.urlencoded());
-
 ConnectDB();
 
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -24,83 +30,47 @@ app.use(
   })
 );
 
-app.get("/skill", async (req, res) => {
-  try {
-    const user = await skill.find();
-    res.json(user);
-  } catch (error) {
-    console.log(error);
-  }
-});
+app.use(cookieParser());
+app.use(express.json())
 
-app.get("/skill/:skillid", async (req, res) => {
-  const { skillid } = req.params;
-  try {
-    // console.log(skillid)
-    const skillData = await skill.findById(skillid);
-    // console.log(skillData)
-    res.json(skillData);
-  } catch (error) {
-    console.log(error);
-  }
-});
+const sessionOptions={
+  // store:store,
+  name: "connect.sid",
+  secret: "asdfghjkkl",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+  expires: new Date(Date.now() + 1000 * 60 ),
+  maxAge:   60 * 1000,
+  httpOnly: true
+}
+}
+app.use(session(sessionOptions))
+ 
+app.use(passport.initialize());  
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()))
 
-app.post("/skill/newskill", async (req, res) => {
-  const skillData = req.body;
-  try {
-    const addSkill = await skill.insertOne(skillData);
-    console.log(addSkill);
-    console.log({ message: "Skill added!", data: req.body });
-    res.json('new skill added successfully!')
-    // res.json();
-  } catch (error) {
-    console.log("mongo error:", error);
-  }
-});
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-app.delete("/skill/:skillid", async (req, res) => {
-  try {
-    const { skillid } = req.params;
-    const deletedSkill = await skill.findByIdAndDelete(skillid);
-    res.json('deleted successfully!')
-    // console.log(deletedSkill);
-  } catch (error) {
-    console.log("mongo deletion error:", error);
-  }
-});
+// Skill routes 
+app.use("/skill",skillRouter)
 
-app.get("skill/:skillid", (req, res) => {
-  try {
-    const { skillid } = req.params;
-    const data = skill.findById(skillid);
-    // console.log(data);
-  } catch (error) {
-    console.log("skill update error:", error);
-  }
-});
+// User Route
+app.use("/user",userRouter)
 
-app.patch("/skill/:skillid", async (req, res) => {
-  try {
-    const { skillid } = req.params;
-    const { skillName, description, image, category, proficiency, profession } =
-      req.body;
+// page not found error
+// app.all('*', (req, res, next) => {
+//   next(new expressError(404, "Page not found"));
+// });
 
-    const updatedSkill = await skill.findByIdAndUpdate(
-      skillid,
-     { skillName,
-      description,
-      image,
-      category,
-      proficiency,
-      profession },
-      { new: true }
-    );
-    console.log('updated successfully!');
-    res.json(updatedSkill);
-  } catch (error) {
-    console.log("mongo update error:", error);
-  }
-});
+// error handlemiddleware 
+app.use((err,req,res,next)=>{
+  const {statusCode=500,message="something went wrong"}=err
+  res.status(statusCode).json(message)
+})
 
 app.listen(Port, (req, res) => {
   console.log(`server is runing on port ${Port}`);
