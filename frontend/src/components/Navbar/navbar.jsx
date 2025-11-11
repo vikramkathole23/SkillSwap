@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
 import { FaRegBell } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const [selectedlink, setselectedlink] = useState(0);
@@ -16,6 +18,16 @@ function Navbar() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  }
+  const handleLogout = async (e) => {
+     try {
+        const res = await axios.post(" http://localhost:3000/user/logout", {}, { withCredentials: true });
+        // console.log(res);
+        // localStorage.clear(user)
+        toast.success(res.data.message);
+     } catch (error) {
+      console.log(error);
+     }
   }
 
   const handleselectedlinks = (idx) => {
@@ -83,6 +95,8 @@ function Navbar() {
               <Link to="/main/my-sessions"><MenuItem onClick={handleClose}>My account</MenuItem></Link>
               <Link to="/signup"><MenuItem onClick={handleClose}>Signup</MenuItem></Link>
               <Link to="/login"><MenuItem onClick={handleClose}>Login</MenuItem></Link>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+
             </Menu>
             {/* <Link to="/main" onClick={()=>handleselectedlinks(4)}><p className={selectedlink==4?selected:""}><Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /></p> </Link> */}
           </div>

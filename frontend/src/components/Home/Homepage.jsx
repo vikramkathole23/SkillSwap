@@ -43,7 +43,7 @@ function HomePage() {
     try {
       const res = await axios.get("http://localhost:3000/skill");
       setData(res.data);
-      console.log(res.data);      
+      // console.log(res.data);      
       setSceleton("true")
     } catch (err) {
       console.error("Error fetching skills:", err);

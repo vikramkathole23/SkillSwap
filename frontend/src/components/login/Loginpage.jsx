@@ -20,29 +20,28 @@ function LoginPage() {
     }));
     // console.log(formData);
   }
-
-  const handleSubmit = async (e) => {
+  
+   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/user/login",formData, { withCredentials: true })
-      .then((res => {
-      if (res.data.success) {
-         // save user in localStorage
-         localStorage.setItem("user", JSON.stringify(res.data.userObj));
-         console.log("User saved:", res.data.userObj);
-      }   
-      }))
-      navigate("/home", { state: { msg: "User Login successfully! 🎉" }, replace: true });
-      toast.success("User Login successfully! 🎉");
+      const res = await axios.post("http://localhost:3000/user/login",formData);
+      console.log(res);
+      
+        navigate("/home", { state: { msg: "User login successfully! 🎉" }, replace: true });
+      toast.success("User login successfully! ");
     } catch (error) {
       if (error.response?.status === 409) {
       navigate("/login", { state: { msg: error.response?.message }, replace: true });
-      toast.success("Incorrect password or email!");
+      console.log(error);
+      
+      toast.success( error.response.data.message );
       }else{
         setError("Unexpected error. Please try again later.")
       }
+      // console.log(error);
+    }
   }
-}
+ 
   return (
     <>
       <div className="Login-container flex justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">

@@ -1,4 +1,4 @@
-import userVerification from "../middleware/authsMiddleware.js";
+import authenticateToken from "../middleware/authsMiddleware.js";
 import express from "express"
 import { Router } from "express"
 import  {wrapAsync}  from "../utils/wrapasync.js"
@@ -19,7 +19,7 @@ router.route("/")
 
 // create New skill 
 router.route("/newskill")
-    .post(userVerification, wrapAsync(createSkill))
+    .post( wrapAsync(createSkill))
 
 // GET,Edit,Delete single Skill
 router.route("/:skillid")

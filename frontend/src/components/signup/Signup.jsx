@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 function SignUpPage() {
   const navigate=useNavigate();
+  const [error,setError] = useState()
   const [formData,setFormData] = useState({
   })
 
@@ -24,7 +25,7 @@ function SignUpPage() {
     try {
       const res = await axios.post("http://localhost:3000/user/register",formData);
       navigate("/login", { state: { msg: "User register successfully! 🎉" }, replace: true });
-      toast.success("User register successfully! 🎉");
+      toast.success("User register successfully! ");
     } catch (error) {
       if (error.response?.status === 409) {
       navigate("/signup", { state: { msg: error.response?.message }, replace: true });

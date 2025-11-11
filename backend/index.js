@@ -8,7 +8,7 @@ import multer from "multer";
 import skillRouter from "./routes/skill.routes.js";
 import userRouter from "./routes/user.routes.js"
 import passport from "passport";
-import localStratergy from "passport-local"
+import LocalStrategy from "passport-local"
 import User from "./models/user.model.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
@@ -33,13 +33,27 @@ app.use(
 app.use(cookieParser());
 app.use(express.json())
 
-// const sessionOption = {
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true,
-// }
+const sessionOptions={
+  // store:store,
+  name: "connect.sid",
+  secret: "asdfghjkkl",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+  expires: new Date(Date.now() + 1000 * 60 ),
+  maxAge:   60 * 1000,
+  httpOnly: true
+}
+}
+app.use(session(sessionOptions))
+ 
+app.use(passport.initialize());  
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()))
 
-// app.use(session(sessionOption))
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Skill routes 
 app.use("/skill",skillRouter)

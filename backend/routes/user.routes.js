@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { LoginUser, registerUser, UserController } from "../controllers/user.controller.js";
+import { LoginUser, registerUser,UserController, LogoutUser } from "../controllers/user.controller.js";
+import {signupValidation,loginValidation} from "../validateSchema/authValidation.js" 
 // import user from "../models/user.model.js"
 
 const router = Router();
 
 router.route("/register")
-    .post(registerUser)   // Register New User
+    .post(signupValidation,registerUser)   // Register New User
 router.route("/login")
-    .post(LoginUser)      // LOgin user
-
+    .post(loginValidation,LoginUser)      // Login user
 router.route("/:id")
     .get(UserController)   // find user
-
+ 
 export default router;

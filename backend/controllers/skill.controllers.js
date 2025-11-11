@@ -17,7 +17,7 @@ export const showSkill = async (req, res) => {
 
 export const createSkill = async (req, res) => {
   const skillData = req.body;
-  console.log(skillData);
+  // console.log(skillData);
 
   const addSkill = await skill.create(skillData);
   console.log(addSkill);

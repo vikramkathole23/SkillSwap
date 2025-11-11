@@ -14,7 +14,7 @@ function AddNewSkill() {
       profession:'',
       proficiency:'',
       category:'',
-      user:user._id
+      // user:user._id
      })
      
      const handleChange=(e)=>{
@@ -28,12 +28,12 @@ function AddNewSkill() {
       e.preventDefault();
       try {
         const userData= await axios.post('http://localhost:3000/skill/newskill',formData)
-        console.log(userData);
+        console.log(formData);
         navigate("/home", { state: { msg: "Skill updated successfully! 🎉" }, replace: true });
-        toast.success("Skill Updated successfully!");
+        toast.success(userData.data.message);
       } catch (error) {
         console.log("new post request:",error);
-        
+        toast.error(error.response.data.message);
       }
      }
 
