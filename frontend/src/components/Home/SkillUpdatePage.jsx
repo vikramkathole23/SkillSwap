@@ -20,6 +20,7 @@ function SkillUpdatePage() {
   useEffect(() => {
     const fetchSkillData = async () => {
       try {
+        
         const res = await axios.get(`http://localhost:3000/skill/${id}`);
         setskillData(res.data);
         //   console.log(Data.data);
@@ -40,17 +41,28 @@ function SkillUpdatePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token');
+        const config = {
+          headers:{
+            'Authorization': `Bearer ${token}`
+          }
+        }
       const responce = await axios.patch(
         `http://localhost:3000/skill/${id}`,
-        skillData
+        skillData,
+        config
       );
       // redirect when skill is updated successfully
-      navigate("/home", { state: { msg: "Skill updated successfully! 🎉" }, replace: true });
+      navigate("/home", { state: { msg: "Skill updated successfully!" }, replace: true });
       toast.success("Skill Updated successfully!");
     } catch (error) {
       console.log("Request URL:", error.config.url);
       console.log("HTTP Method:", error.config.method);
       console.log("Status Code:", error.response.status);
+      console.log(error);
+      
+       toast.error(error.response.data);
+      
     }
   };
 

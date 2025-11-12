@@ -22,25 +22,69 @@ function LoginPage() {
   }
   
    const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:3000/user/login",formData);
-      console.log(res);
+       e.preventDefault();
+       const {email,password} = formData;
+       if (!email || !password) {
+         return toast.error("All field are required!")
+       }
+       try {
+         // const api = "http://localhost:3000/user/signup";
+         const res = await axios.post(
+         "http://localhost:3000/user/login",
+         formData,
+         {
+           headers: {
+             "Content-Type": "application/json"
+           }
+         }
+       );
+         const {success,message,error,jwtToken,findUser} = res.data;
+         console.log(res);
+         
+         if (success) {
+           toast.success(message);
+           localStorage.setItem('token' , jwtToken)
+          //  localStorage.setItem('loginUser' , findUser)
+          localStorage.setItem("loginUser", JSON.stringify( findUser));
+
+           setTimeout(() => {
+             navigate("/home");
+           }, 1000);
+         } else if (error) {
+           const details = error?.details[0].message;
+           toast.error(details)
+         } else if (!success) {
+           toast.error(message)
+         }
+       } catch (error) {
+          toast.error( error.response?.data?.message 
+           || error.response?.data?.error?.details?.[0]?.message
+           || "Something went wrong.")
+       }
+       
+       
+     }
+
+  //  const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const res = await axios.post("http://localhost:3000/user/login",formData);
+  //     console.log(res);
       
-        navigate("/home", { state: { msg: "User login successfully! 🎉" }, replace: true });
-      toast.success("User login successfully! ");
-    } catch (error) {
-      if (error.response?.status === 409) {
-      navigate("/login", { state: { msg: error.response?.message }, replace: true });
-      console.log(error);
+  //       navigate("/home", { state: { msg: "User login successfully! 🎉" }, replace: true });
+  //     toast.success("User login successfully! ");
+  //   } catch (error) {
+  //     if (error.response?.status === 409) {
+  //     navigate("/login", { state: { msg: error.response?.message }, replace: true });
+  //     console.log(error);
       
-      toast.success( error.response.data.message );
-      }else{
-        setError("Unexpected error. Please try again later.")
-      }
-      // console.log(error);
-    }
-  }
+  //     toast.success( error.response.data.message );
+  //     }else{
+  //       setError("Unexpected error. Please try again later.")
+  //     }
+  //     // console.log(error);
+  //   }
+  // }
  
   return (
     <>

@@ -5,7 +5,7 @@ import {signupValidation,loginValidation} from "../validateSchema/authValidation
 
 const router = Router();
 
-router.route("/register")
+router.route("/signup")
     .post(signupValidation,registerUser)   // Register New User
 router.route("/login")
     .post(loginValidation,LoginUser)      // Login user

@@ -22,18 +22,37 @@ function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const {fullName,email,password} = formData;
+    if (!fullName || !email || !password) {
+      return toast.error("All field are required!")
+    }
     try {
-      const res = await axios.post("http://localhost:3000/user/register",formData);
-      navigate("/login", { state: { msg: "User register successfully! 🎉" }, replace: true });
-      toast.success("User register successfully! ");
-    } catch (error) {
-      if (error.response?.status === 409) {
-      navigate("/signup", { state: { msg: error.response?.message }, replace: true });
-      toast.success("User already exist registered with this email");
-      }else{
-        setError("Unexpected error. Please try again later.")
+      // const api = "http://localhost:3000/user/signup";
+      const res = await axios.post(
+      "http://localhost:3000/user/signup",
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-      // console.log(error);
+    );
+      const {success,message,error} = res.data;
+      console.log(res);
+      
+      if (success) {
+        toast.success(message);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      } else if (error) {
+        const details = error?.details[0].message;
+        toast.error(details)
+      } else if (!success) {
+        toast.error(message)
+      }
+    } catch (error) {
+       toast.error(error)
     }
     
     

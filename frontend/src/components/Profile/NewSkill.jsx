@@ -6,15 +6,17 @@ import toast from "react-hot-toast";
 
 function AddNewSkill() {
     const navigate=useNavigate();
-    const user = JSON.parse(localStorage.getItem("user"));
+    // const user = localStorage.getItem("loginUser");
+    // const user = JSON.parse(localStorage.getItem("loginUser"));
+     const storedUser = localStorage.getItem("loginUser");
+    const user = storedUser ? JSON.parse(storedUser) : null;
+     if (!user) {
+    return <p>User not logged in</p>;
+  }
+    console.log(user);
+    
     const [formData,setFormData]=useState({
-      skillName:'',
-      image:'',
-      description:'',
-      profession:'',
-      proficiency:'',
-      category:'',
-      // user:user._id
+      user:user._id
      })
      
      const handleChange=(e)=>{
@@ -27,13 +29,19 @@ function AddNewSkill() {
      const handleSubmit = async(e)=>{
       e.preventDefault();
       try {
-        const userData= await axios.post('http://localhost:3000/skill/newskill',formData)
-        console.log(formData);
-        navigate("/home", { state: { msg: "Skill updated successfully! 🎉" }, replace: true });
-        toast.success(userData.data.message);
+        const token = localStorage.getItem('token');
+        const config = {
+          headers:{
+            'Authorization': `Bearer ${token}`
+          }
+        }
+        const res= await axios.post('http://localhost:3000/skill/newskill',formData,config)
+        console.log(res);
+        navigate("/home", { state: { msg: "Skill updated successfully!" }, replace: true });
+        toast.success(res.data.message);
       } catch (error) {
         console.log("new post request:",error);
-        toast.error(error.response.data.message);
+        toast.error(error.response.data);
       }
      }
 

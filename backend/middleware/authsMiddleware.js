@@ -23,17 +23,32 @@ import jwt from "jsonwebtoken";
 //   }) 
 // }
 
-const authenticateToken = (req, res, next) => {
+const isAuthenticate = (req, res, next) => {
   const authHeader = req.headers['authorization'];
+  // console.log(req);
+  
+  if(!authHeader) {
+    return res.status(403)
+      .json('Unauthorized, JWT token is required')
+  }
+
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) return res.status(401).json('Token required');
+  if(!token) {
+    return res.status(403)
+      .json('Unauthorized, token missing')
+  }
 
-  jwt.verify(token, secretKey, (err, user) => {
-    if (err) return res.status(403).json('Invalid or expired token');
-    req.user = user;
+   try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET );
+    req.user = decoded;
     next();
-  });
+   } catch (error) {
+    if (error) {
+      return res.status(403)
+        .json('Unauthorized, JWT token is wrong or expired')
+    }
+   } 
 };
 
-export default authenticateToken;
+export default isAuthenticate;
