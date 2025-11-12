@@ -2,8 +2,8 @@ import User from "../models/user.model.js";
 import dotenv from 'dotenv'
 dotenv.config()
 import jwt from "jsonwebtoken";
-import passport from "passport";
-import createSecretToken from "../utils/SecretToken.js";
+// import passport from "passport";
+// import createSecretToken from "../utils/SecretToken.js";
 import bcrypt from  "bcrypt";
 
 
@@ -27,17 +27,14 @@ export const registerUser = async (req, res) => {
   // bcrypt password
   newUser.password = await bcrypt.hash(password,10);
   await newUser.save();
-  console.log(newUser);
   return res
         .status(201)
-        .json({message: "User register successfull!", success: true });
+        .json({message: "User register successfull!, Now you can login.", success: true });
 
   } catch (error) {
-    console.log(error);
-    
     return res
         .status(500)
-        .json({message: "Internal server error!", success: false });
+        .json({message: "Internal server error!", success: false ,error});
   }
 }
 
@@ -63,14 +60,21 @@ try {
       .json({message:errMessage,success:false})
   }
 
- const token = jwt.sign(
+ const jwtToken = jwt.sign(
   { id: findUser._id, email: findUser.email },
   process.env.JWT_SECRET,
   { expiresIn: "7d" }
 );
 
    return res.status(201)
-   .json({ message: "Login successful", success: true , token ,email,userName:findUser.fullName });
+   .json({
+     message: "Login successful",
+    success: true ,
+    jwtToken , 
+    findUser
+    // email , 
+    // userName:findUser.fullName 
+  });
   
 } catch (error) {
   console.log(error);

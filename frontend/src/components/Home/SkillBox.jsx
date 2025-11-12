@@ -41,12 +41,19 @@ function SkillBox({ data ,sceleton  }){
 
 const deleteSkill = async () => {
   try {
-    const res = await axios.delete(`http://localhost:3000/skill/${data._id}`);
-    console.log(data._id);
+    const token = localStorage.getItem('token');
+      const config = {
+        headers:{
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    const res = await axios.delete(`http://localhost:3000/skill/${data._id}`,config);
+    // console.log(data._id);
     navigate("/home", { state: { msg: "Skill updated successfully! 🎉" }, replace: true });
     toast.success("Skill Deleted successfully!");
   } catch (error) {
     console.log("deletion error:",error)
+    toast.error(error.response.data);
   }
 }
 
