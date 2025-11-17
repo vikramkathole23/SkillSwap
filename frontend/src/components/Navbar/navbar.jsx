@@ -2,16 +2,18 @@ import React, { useState } from "react";
 // import { FaSearch } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
 import { FaRegBell } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
 function Navbar() {
   const [selectedlink, setselectedlink] = useState(0);
    const [anchorEl, setAnchorEl] = React.useState(null);
+   const navigate = useNavigate()
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

@@ -1,11 +1,12 @@
 import skill from "../models/skill.model.js";
+import User from "../models/user.model.js";
 // import expressError from "../utils/expressError";
 
 export const showSkill = async (req, res) => {
   try {
       const skills = await skill.find().populate("user");
-  const safeSkills = skills.map((skill) => {
-    if (skill.user) {
+      const safeSkills = skills.map((skill) => {
+    if(skill.user) {
       const { password, ...safeUser } = skill.user.toObject();
       return { ...skill.toObject(), user: safeUser };
     }
@@ -21,18 +22,34 @@ export const showSkill = async (req, res) => {
 
 export const createSkill = async (req, res) => {
   try {
-    console.log(req);
-    
+    const {user} = req.body;
     const skillData = req.body;
+
+    // find user by id
+    const findUser = await User.findById(user);    
+
+    // if user not found then return 
+    if (!findUser) {
+      return res.status(404).json("user is not register!")
+    }
+   
+    // add skill in db
     const addSkill = await skill.create(skillData);
-    console.log(addSkill);
-    console.log({ message: "Skill added!", data: req.body });
+
+    // if not skill array in finduser create an array 
+    if (!findUser.skills) {
+      findUser.skills = [];
+    }
+    
+    // push skill id in that array
+    findUser.skills.push(addSkill._id);
+    //and save it
+    await findUser.save();
+    // then return 
     return res.status(201).json({message:"New Skill added."});
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" }, error);
-
-    
+    res.status(500).json({ message: "Server error" }, error);   
   }
 };
 
