@@ -28,14 +28,13 @@ const UserSchema = new Schema(
     // profile_pic:{
     //     type:String,
     // }
-    skills: [
+    skills: 
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: [mongoose.Schema.Types.ObjectId],
         ref: "skill",
         required: true
       },
-    ],
-  },
+    },
   { timestamps: true }
 );
 

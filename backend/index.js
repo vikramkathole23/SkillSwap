@@ -7,27 +7,38 @@ import bodyParser from "body-parser";
 import multer from "multer";
 import skillRouter from "./routes/skill.routes.js";
 import userRouter from "./routes/user.routes.js"
-import passport from "passport";
-import LocalStrategy from "passport-local"
+// import passport from "passport";
+// import LocalStrategy from "passport-local"
 import User from "./models/user.model.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
+import { Server } from 'socket.io';
+import {createServer} from 'http'
+import ioConnection from './sockets/index.socket.js';
+
 // import mongoose from "mongoose";
 
 const Port = process.env.PORT;
 const app = express();
-const upload = multer({ dest: "uploads/" });
+const server = createServer(app);
+const corsOption = {
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST","PUT", "PATCH", "DELETE"],
+  credentials: true,
+}
+const io = new Server(server,{
+  cors:corsOption
+})
+// const upload = multer({ dest: "uploads/" });
+// socket connection
+ioConnection(io);
 
 ConnectDB();
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST","PUT", "PATCH", "DELETE"],
-    credentials: true,
-  })
+  cors(corsOption)
 );
 
 app.use(cookieParser());
@@ -47,13 +58,13 @@ const sessionOptions={
 }
 app.use(session(sessionOptions))
  
-app.use(passport.initialize());  
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()))
+// app.use(passport.initialize());  
+// app.use(passport.session());
+// passport.use(new LocalStrategy(User.authenticate()))
 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(User.createStrategy());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 // Skill routes 
 app.use("/skill",skillRouter)
@@ -72,6 +83,6 @@ app.use((err,req,res,next)=>{
   res.status(statusCode).json(message)
 })
 
-app.listen(Port, (req, res) => {
+server.listen(Port, (req, res) => {
   console.log(`server is runing on port ${Port}`);
 });
