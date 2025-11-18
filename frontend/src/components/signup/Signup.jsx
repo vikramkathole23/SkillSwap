@@ -45,14 +45,14 @@ function SignUpPage() {
         setTimeout(() => {
           navigate("/login");
         }, 1000);
-      } else if (error) {
-        const details = error?.details[0].message;
-        toast.error(details)
-      } else if (!success) {
-        toast.error(message)
-      }
+      } 
     } catch (error) {
-       toast.error(error)
+      if (error.response && error.response.status === 409) {
+         toast.error("This email is already registered. please log in instead.")
+      } else {
+        toast.error("something went wrong. please try again. ")
+      }
+      
     }
     
     
