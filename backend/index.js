@@ -14,7 +14,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import { Server } from 'socket.io';
 import {createServer} from 'http'
-import ioConnection from './sockets/index.socket.js';
+// import ioConnection from './sockets/index.socket.js';
 
 // import mongoose from "mongoose";
 
@@ -31,7 +31,7 @@ const io = new Server(server,{
 })
 // const upload = multer({ dest: "uploads/" });
 // socket connection
-ioConnection(io);
+// ioConnection(io)
 
 ConnectDB();
 

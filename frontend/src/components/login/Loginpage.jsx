@@ -18,7 +18,6 @@ function LoginPage() {
       ...prev,
       [name]: value
     }));
-    // console.log(formData);
   }
   
    const handleSubmit = async (e) => {
@@ -34,22 +33,20 @@ function LoginPage() {
          formData,
          {
            headers: {
-             "Content-Type": "application/json"
+             "Content-Type":"application/json"
            }
          }
        );
          const {success,message,error,jwtToken,findUser} = res.data;
-         console.log(res);
-         
          if (success) {
-           toast.success(message);
-           localStorage.setItem('token' , jwtToken)
-          //  localStorage.setItem('loginUser' , findUser)
+          toast.success(message);
+          localStorage.setItem('token' , jwtToken)
           localStorage.setItem("loginUser", JSON.stringify( findUser));
 
-           setTimeout(() => {
-             navigate("/home");
-           }, 1000);
+          setTimeout(() => {
+            navigate("/home");
+          }, 1000);  
+
          } else if (error) {
            const details = error?.details[0].message;
            toast.error(details)
