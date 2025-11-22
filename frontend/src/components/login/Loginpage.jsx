@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useState } from "react";
@@ -37,17 +37,19 @@ function LoginPage() {
            }
          }
        );
-         const {success,message,error,jwtToken,findUser} = res.data;
+         const {success,message,error,jwtToken,user} = res.data;
          if (success) {
           toast.success(message);
           localStorage.setItem('token' , jwtToken)
-          localStorage.setItem("loginUser", JSON.stringify( findUser));
+          localStorage.setItem("user", JSON.stringify( user));
 
           setTimeout(() => {
             navigate("/home");
           }, 1000);  
 
          } else if (error) {
+          console.log(error);
+          
            const details = error?.details[0].message;
            toast.error(details)
          } else if (!success) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -6,6 +6,8 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import RequestCard from "./Cart";
 import TabButton from "../MySwap/TabButton";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const requestsData = {
   accepted: [
@@ -41,58 +43,131 @@ const requestsData = {
 };
 
 function MySessionsPage() {
-    const [tab, setTab] = useState("incoming");
-      const [value, setValue] = useState("1");
-    
-      const handleChange = (event, newValue) => {
-        setValue(newValue);
-      };
-    
-  
-    return ( 
-        <div className="p-8">
-       <h1 className="text-2xl font-bold">Requests</h1>
-        <p className="text-gray-400 mb-4">
-          Manage your incoming and outgoing requests
-        </p>
+  const [tab, setTab] = useState("incoming");
+  const [value, setValue] = useState("1");
+  const [pending, setPending] = useState([]);
+  const [accepted, setAccepted] = useState([]);
+  const [regected, setRegected] = useState([]);
 
-        {/* Tabs */}
-        <div className="flex gap-6 border-b border-gray-700 mb-6">
-          <Box sx={{ width: "100%", typography: "body1" }}>
-            <TabContext value={value}>
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <TabList onChange={handleChange} aria-label="Skill Tabs">
-                  <Tab value="1" label={<TabButton label="Incoming" />}  />
-                  <Tab value="2" label={<TabButton label="Pending" />} />
-                  <Tab value="3"  label={<TabButton label="Rejected" />}/>
-                </TabList>
-              </Box>
-              <TabPanel value="1">
-                <div className="Skill-section flex flex-wrap gap-3 mt-4">
-                  {requestsData.accepted.map((req, i) => (
-                    <RequestCard key={i} data={req} />
-                  ))}
-                </div>
-              </TabPanel>
-              <TabPanel value="2">
-                <div className="Skill-section flex flex-wrap gap-3 mt-4">
-                  {requestsData.pending.map((req, i) => (
-                    <RequestCard key={i} data={req} />
-                  ))}
-                </div>
-              </TabPanel>
-              <TabPanel value="3">
-                <div className="Skill-section flex flex-wrap gap-3 mt-4">
-                  {requestsData.rejected.map((req, i) => (
-                    <RequestCard key={i} data={req} />
-                  ))}
-                </div>
-              </TabPanel>
-            </TabContext>
-          </Box>
-        </div> 
-        </div>
-     );
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) {
+        return toast.error("you are not login!")
+      }
+      try {
+        const res = await axios.get(
+          `http://localhost:3000/user/requests/${user._id}`
+        );
+
+        const data = res.data;
+
+        const p = [];
+        const a = [];
+        const r = [];
+
+      data.forEach(req => {
+        if (req.status === "pending") {
+           p.push(req)
+        } else if (req.status === "accepted") {
+          a.push(req)
+        } else {
+          r.push(req)
+        }
+      });
+        setPending(p)
+        setAccepted(a)
+        setRegected(r);
+         
+      } catch (err) {
+        console.error("Error fetching skills:", err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const onAccept = async (requestId, selectedDate) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return toast.error("you are not login!")
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      if (!selectedDate) {
+        return toast.error("please select Time and Date");
+      }
+
+      const stringDate = selectedDate.toISOString();
+      const data = {
+        status: "accepted",
+        stringDate,
+      };
+      const res = await axios.patch(
+        `http://localhost:3000/skill/swap/send/${requestId}`,
+        data,
+        config
+      );
+      console.log(res);
+      
+      toast.success("request accepted!");
+    } catch (error) {
+      console.error("Error fetching skills:", error.response);
+      toast.success(error.response.data);
+    }
+  };
+
+  return (
+    <div className="p-8">
+      <h1 className="text-2xl font-bold">Requests</h1>
+      <p className="text-gray-400 mb-4">
+        Manage your incoming and outgoing requests
+      </p>
+
+      {/* Tabs */}
+      <div className="flex gap-6 border-b border-gray-700 mb-6">
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList onChange={handleChange} aria-label="Skill Tabs">
+                <Tab value="1" label={<TabButton label="pending" />} />
+                <Tab value="2" label={<TabButton label="Incoming" />} />
+                <Tab value="3" label={<TabButton label="Rejected" />} />
+              </TabList>
+            </Box>
+            <TabPanel value="1">
+              <div className="Skill-section flex flex-wrap gap-3 mt-4 ">
+                {pending?.map((req) => (
+                  <RequestCard key={req._id} data={req} onAccept={onAccept} />
+                ))}
+              </div>
+            </TabPanel>
+            <TabPanel value="2">
+              <div className="Skill-section flex flex-wrap gap-3 mt-4 ">
+                {accepted?.map((req) => (
+                  <RequestCard key={req._id} data={req} onAccept={onAccept} />
+                ))}
+              </div>
+            </TabPanel>
+            <TabPanel value="3">
+              <div className="Skill-section flex flex-wrap gap-3 mt-4 ">
+                {regected?.map((req) => (
+                  <RequestCard key={req._id} data={req} onAccept={onAccept} />
+                ))}
+              </div>
+            </TabPanel>
+          </TabContext>
+        </Box>
+      </div>
+    </div>
+  );
 }
 
 export default MySessionsPage;

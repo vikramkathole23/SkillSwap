@@ -29,14 +29,14 @@ const isAuthenticate = (req, res, next) => {
   
   if(!authHeader) {
     return res.status(403)
-      .json('Unauthorized, JWT token is required')
+      .json('Unauthorized, You must have login!')
   }
 
   const token = authHeader && authHeader.split(' ')[1];
 
   if(!token) {
     return res.status(403)
-      .json('Unauthorized, token missing')
+      .json('Unauthorized, You are not login!')
   }
 
    try {

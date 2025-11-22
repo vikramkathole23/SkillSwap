@@ -8,7 +8,7 @@ function AddNewSkill() {
     const navigate=useNavigate();
     // const user = localStorage.getItem("loginUser");
     // const user = JSON.parse(localStorage.getItem("loginUser"));
-     const storedUser = localStorage.getItem("loginUser");
+     const storedUser = localStorage.getItem("user");
     const user = storedUser ? JSON.parse(storedUser) : null;
      if (!user) {
     return <p>User not logged in</p>;
