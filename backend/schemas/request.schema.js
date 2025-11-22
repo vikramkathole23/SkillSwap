@@ -1,18 +1,20 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const requestSchema = new mongoose.Schema({
-  from: { 
+  sender: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: "User", 
+    ref: "user", 
     required: true 
     },
-  to: { 
+  receiver: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: "User", 
+    ref: "user", 
     required: true 
     },
-  skill: { 
-    type: String, 
+  skillId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "skill",
     required: true 
     },
   status: {
@@ -20,10 +22,6 @@ const requestSchema = new mongoose.Schema({
     enum: ["pending", "accepted", "rejected"],
     default: "pending",
   },
-  createdAt: {
-    type: Date, 
-    default: Date.now 
-   },
-});
+},{ timestamps: true });
 
 export default requestSchema;

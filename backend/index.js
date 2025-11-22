@@ -7,16 +7,13 @@ import bodyParser from "body-parser";
 import multer from "multer";
 import skillRouter from "./routes/skill.routes.js";
 import userRouter from "./routes/user.routes.js"
-// import passport from "passport";
-// import LocalStrategy from "passport-local"
 import User from "./models/user.model.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import { Server } from 'socket.io';
 import {createServer} from 'http'
-// import ioConnection from './sockets/index.socket.js';
+import ioConnection from './sockets/index.socket.js';
 
-// import mongoose from "mongoose";
 
 const Port = process.env.PORT;
 const app = express();
@@ -27,14 +24,13 @@ const corsOption = {
   credentials: true,
 }
 const io = new Server(server,{
-  cors:corsOption
+  cors : corsOption ,
+  transports: ["websocket", "polling"],
 })
-// const upload = multer({ dest: "uploads/" });
-// socket connection
-// ioConnection(io)
 
 ConnectDB();
 
+app.set("io",io)
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -43,6 +39,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json())
+
 
 const sessionOptions={
   // store:store,
@@ -82,6 +79,8 @@ app.use((err,req,res,next)=>{
   const {statusCode=500,message="something went wrong"}=err
   res.status(statusCode).json(message)
 })
+
+ioConnection(io);
 
 server.listen(Port, (req, res) => {
   console.log(`server is runing on port ${Port}`);

@@ -2,6 +2,7 @@ import isAuthenticate from "../middleware/authsMiddleware.js";
 import express from "express"
 import { Router } from "express"
 import  {wrapAsync}  from "../utils/wrapasync.js"
+import { sendSwapRequest , getUserRequests , updateRequestStatus } from "../controllers/skillSwapRequest.js";
 import {
   showSkill,
   createSkill,
@@ -27,5 +28,10 @@ router.route("/:skillid")
     .patch( isAuthenticate,wrapAsync(editSkill))      // edit skill route
     .delete(isAuthenticate,wrapAsync(deleteSkill))   // delete skill route
 
+router.route("/swap/send")
+    .post(isAuthenticate,sendSwapRequest)
+
+router.route("/swap/send/:id")
+    .patch(isAuthenticate,updateRequestStatus)
 
 export default router;

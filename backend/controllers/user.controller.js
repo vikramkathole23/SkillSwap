@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from  "bcrypt";
 
 
+
 export const registerUser = async (req, res) => {
   try {
     const { email, password, fullName } = req.body;
@@ -64,14 +65,21 @@ try {
   { id: findUser._id, email: findUser.email },
   process.env.JWT_SECRET,
   { expiresIn: "1h" }
-);
+); 
 
+  const user ={
+    _id: findUser._id,
+    name: findUser.fullName,
+    email: findUser.email
+  }
+   console.log(user);
+   
    return res.status(201)
    .json({
      message: "Login successful",
     success: true ,
     jwtToken , 
-    findUser
+    user
     // email , 
     // userName:findUser.fullName 
   });

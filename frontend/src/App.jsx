@@ -14,6 +14,7 @@ import MySessionsPage from "./components/Profile/RequestPage"; // assuming this 
 import SwapPage from "./components/MySwap/mySwap";
 import UserProfile from "./components/UserProfile/Userprofile";
 import SkillUpdatePage from "./components/Home/SkillUpdatePage";
+import ChatPage from "./components/chatPage";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="/home/:id" element={<UserProfile />} />
         <Route path="/skill/:id/update" element={<SkillUpdatePage />} />
         <Route path="/home/user/:id" element={<UserProfile />} />
+        {/* <Route path="/home/user/:id/chat" element={<UserProfile />} /> */}
+        <Route path="/home/user/:id/chat" element={<ChatPage />} />
 
         {/* <Route path="/skill/:id/updatepage" element={<SkillUpdatePage/>} /> */}
 

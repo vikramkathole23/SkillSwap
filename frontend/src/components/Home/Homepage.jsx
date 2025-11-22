@@ -4,6 +4,8 @@ import { useEffect,useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { socket } from '../socket';
 
 
 
@@ -51,6 +53,19 @@ function HomePage() {
   };
   fetchData();
   }, []);
+
+  useEffect(()=>{
+    socket.connect();
+    const user = JSON.parse(localStorage.getItem("user"))
+    if (user?._id) {
+    socket.emit("register", user._id);
+  }
+
+  socket.on("new_request", (data) => {
+    // console.log("Notification received:", data);
+    toast.success(data.message);
+  });
+  },[])
 
     return ( 
         <>
