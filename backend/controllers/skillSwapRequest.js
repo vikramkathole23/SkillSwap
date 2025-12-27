@@ -1,4 +1,3 @@
-
 import meeting from "../models/meetindSchedule.model.js";
 import request from "../models/request.model.js";
 import ioConnection from "../sockets/index.socket.js";
@@ -6,9 +5,10 @@ import ioConnection from "../sockets/index.socket.js";
 export const sendSwapRequest = async (req, res) => {
   try {
     const { senderId, receiverId, skillId } = req.body;
+    // ioConnection();
     const io = req.app.get("io");
     if (senderId == receiverId) {
-      return res.status(500).json("you are not send request to yourself!");
+      return res.status(500).json("you cannot send request to yourself!");
     }
     if (!io) {
      console.log("IO NOT FOUND");
@@ -26,6 +26,7 @@ export const sendSwapRequest = async (req, res) => {
       senderId,
       skillId,
     });
+    console.log(receiverId )
     res.status(201).json(Request);
   } catch (error) {
     console.error(error);

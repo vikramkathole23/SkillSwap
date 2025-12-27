@@ -2,10 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { io } from "socket.io-client";
 import { socket } from "./socket";
+import { useParams } from "react-router-dom";
+
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const id = useParams()
 
   useEffect(() => {
     socket.connect();

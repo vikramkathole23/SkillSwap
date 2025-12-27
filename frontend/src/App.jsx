@@ -15,6 +15,7 @@ import SwapPage from "./components/MySwap/mySwap";
 import UserProfile from "./components/UserProfile/Userprofile";
 import SkillUpdatePage from "./components/Home/SkillUpdatePage";
 import ChatPage from "./components/chatPage";
+import VideoMeetComponent from "./components/videoStream/videoMeetPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/home/user/:id" element={<UserProfile />} />
         {/* <Route path="/home/user/:id/chat" element={<UserProfile />} /> */}
         <Route path="/home/user/:id/chat" element={<ChatPage />} />
+        <Route path='/home/stream/:url' element={<VideoMeetComponent />} />
 
         {/* <Route path="/skill/:id/updatepage" element={<SkillUpdatePage/>} /> */}
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -85,6 +85,10 @@ function SkillBox({ data, sceleton }) {
     }
   };
 
+  const sendMassege = (id)=>{
+    navigate(`/home/user/${id}/chat`)
+  }
+
   return (
     <>
       {data ? (
@@ -143,14 +147,25 @@ function SkillBox({ data, sceleton }) {
                         </Link>
                       </>
                     ) : (
-                      <button
-                        onClick={() => {
-                          SendRequest(data.user?._id, data._id);
-                        }}
-                        className="box-btn px-4 py-1 "
-                      >
-                        Request Swap
-                      </button>
+                      <>
+                        <button
+                          onClick={() => {
+                            SendRequest(data.user?._id, data._id);
+                          }}
+                          className="box-btn px-4 py-1 ml-4"
+                        >
+                          Request Swap
+                        </button>
+                        
+                        <button
+                          onClick={() => {
+                            sendMassege(data.user?._id);
+                          }}
+                          className="box-btn px-4 py-1 ml-4"
+                        >
+                          massege
+                        </button>
+                      </>
                     )
                   }
                  
@@ -160,7 +175,7 @@ function SkillBox({ data, sceleton }) {
               <div className="Box-image h-[200px]">
                 <img
                   className="h-full "
-                  src="https://framerusercontent.com/images/0YHMW01oxIdRY4oW3VsdPXOL8xQ.jpg "
+                  src={data.image}
                   alt="img"
                 />
               </div>

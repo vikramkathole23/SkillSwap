@@ -62,8 +62,8 @@ function HomePage() {
   }
 
   socket.on("new_request", (data) => {
-    // console.log("Notification received:", data);
-    toast.success(data.message);
+    console.log("Notification received:", data);
+    toast.success(data?.message);
   });
   },[])
 

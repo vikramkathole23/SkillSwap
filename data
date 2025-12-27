@@ -1,0 +1,162 @@
+[
+  {
+    "skillName": "Nebula New Coding",
+    "profession": "Student",
+    "description": "Writing code that feels like it drifted out of a supernova but still runs perfect on localhost.",
+    "category": "Photography",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475"
+  },
+  {
+    "skillName": "Cosmic UI Crafting",
+    "profession": "Frontend Developer",
+    "description": "Designing interfaces that look like they were baked in a galaxy oven, crispy and smooth.",
+    "category": "Design",
+    "proficiency": "Intermediate",
+    "imageUrl": "https://images.unsplash.com/photo-1559027615-cd4628902d4a"
+  },
+  {
+    "skillName": "Galaxy Backend Engineering",
+    "profession": "Backend Dev",
+    "description": "Building APIs tougher than black holes and smoother than dark matter flow.",
+    "category": "Programming",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4"
+  },
+  {
+    "skillName": "Astro Problem Solving",
+    "profession": "Student",
+    "description": "Turning bugs into shooting stars instead of disasters.",
+    "category": "Development",
+    "proficiency": "Intermediate",
+    "imageUrl": "https://images.unsplash.com/photo-1517142089942-ba376ce32a0b"
+  },
+  {
+    "skillName": "Lunar Photography",
+    "profession": "Photographer",
+    "description": "Capturing vibes like moonlight on calm water, aesthetic maxed out.",
+    "category": "Photography",
+    "proficiency": "Advanced",
+    "imageUrl": "Capturing vibes like moonlight on calm water, aesthetic maxed out."
+  },
+  {
+    "skillName": "Starry Logic Building",
+    "profession": "Programmer",
+    "description": "Creating logic so clean even constellations would line up for it.",
+    "category": "Programming",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1537432376769-00a12a52f1f7"
+  },
+  {
+    "skillName": "Meteor Animation",
+    "profession": "UI Animator",
+    "description": "Making animations smoother than shooting stars drifting across space.",
+    "category": "Design",
+    "proficiency": "Intermediate",
+    "imageUrl": "https://images.unsplash.com/photo-1559027615-5c9b3d9ff9f1"
+  },
+  {
+    "skillName": "Orbit-Level Debugging",
+    "profession": "Developer",
+    "description": "Fixing bugs like NASA fixes satellites – calm, calculated, and flawless.",
+    "category": "Programming",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1525186402429-b4ff38bedbec"
+  },
+  {
+    "skillName": "Comet Creativity",
+    "profession": "Student",
+    "description": "Ideas that hit fast, bright, and leave everyone stunned.",
+    "category": "Creativity",
+    "proficiency": "Intermediate",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+  },
+  {
+    "skillName": "Planetary Presentation",
+    "profession": "Learner",
+    "description": "Presentations so smooth even teachers orbit around the slides.",
+    "category": "Communication",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0"
+  },
+  {
+    "skillName": "Solar Editing",
+    "profession": "Content Creator",
+    "description": "Editing like sunlight – bright, warm, and absolutely necessary.",
+    "category": "Media",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1581276879432-15a3362893d0"
+  },
+  {
+    "skillName": "Asteroid-Level Focus",
+    "profession": "Student",
+    "description": "Locking onto tasks like an asteroid locked onto orbit.",
+    "category": "Productivity",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1522199710521-72d69614c702"
+  },
+  {
+    "skillName": "Milky Way Storytelling",
+    "profession": "Writer",
+    "description": "Stories flowing like the galaxy, endless and beautiful.",
+    "category": "Writing",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1492724441997-5dc865305da7"
+  },
+  {
+    "skillName": "Nova UI Testing",
+    "profession": "Tester",
+    "description": "Breaking apps gently so users don’t have to experience chaos.",
+    "category": "QA",
+    "proficiency": "Intermediate",
+    "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+  },
+  {
+    "skillName": "Blackhole Problem Solving",
+    "profession": "Developer",
+    "description": "Dragging problems in and never letting them escape.",
+    "category": "Programming",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1487015307662-6ce6210680f1"
+  },
+  {
+    "skillName": "Galaxy-Level Planning",
+    "profession": "Student",
+    "description": "Planning so organized even planets would follow the schedule.",
+    "category": "Management",
+    "proficiency": "Intermediate",
+    "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978"
+  },
+  {
+    "skillName": "Starlight Creativity",
+    "profession": "Designer",
+    "description": "Ideas shining bright at the right time, never missing.",
+    "category": "Design",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"
+  },
+  {
+    "skillName": "Orbit-Controlled Time Management",
+    "profession": "Student",
+    "description": "Balancing tasks like planets balancing gravity – perfectly aligned.",
+    "category": "Productivity",
+    "proficiency": "Intermediate",
+    "imageUrl": "https://images.unsplash.com/photo-1521790797524-b2497295b8a0"
+  },
+  {
+    "skillName": "Universe-Level Thinking",
+    "profession": "Learner",
+    "description": "Thinking bigger than limits, beyond horizons, always exploring.",
+    "category": "Mindset",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
+  },
+  {
+    "skillName": "Stellar Teamwork",
+    "profession": "Collaborator",
+    "description": "Working with people like stars in a constellation, connected and shining together.",
+    "category": "Teamwork",
+    "proficiency": "Advanced",
+    "imageUrl": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+  }
+]
