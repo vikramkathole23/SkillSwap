@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { FaSearch } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
 import { FaRegBell } from "react-icons/fa6";
@@ -8,6 +8,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { jwtDecode } from "jwt-decode";
+
 
 function Navbar() {
   const [selectedlink, setselectedlink] = useState(0);
@@ -21,12 +23,28 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const scheduleAutoLogout = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  const { exp } = jwtDecode(token);
+  const timeLeft = exp * 1000 - Date.now();
+
+  setTimeout(() => logout(navigate), timeLeft);
+};
+
+  
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("loginUser");
-    localStorage.removeItem("user");
+    localStorage.removeItem("user")
     navigate("/login");
   };
+
+  useEffect(()=>{
+    scheduleAutoLogout()
+  },[])
 
   const handleselectedlinks = (idx) => {
     setselectedlink(idx);

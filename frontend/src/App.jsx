@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {useLocation, BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/navbar";
@@ -18,9 +18,14 @@ import ChatPage from "./components/chatPage";
 import VideoMeetComponent from "./components/videoStream/videoMeetPage";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
+  const location = useLocation();
+  return (<>
+    {/* // <BrowserRouter> */}
+    {/* <Routes/>
+       <Route path='/home/stream/:url' element={<VideoMeetComponent />} />
+    <Routes/> */}
+     {location.pathname=='skillSwap-video-call/stream/:url'? <Navbar />:""}
+     {/* <Navbar/> */}
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/my-swap" element={<SwapPage />} />
@@ -32,7 +37,7 @@ function App() {
         <Route path="/home/user/:id" element={<UserProfile />} />
         {/* <Route path="/home/user/:id/chat" element={<UserProfile />} /> */}
         <Route path="/home/user/:id/chat" element={<ChatPage />} />
-        <Route path='/home/stream/:url' element={<VideoMeetComponent />} />
+        <Route path='skillSwap-video-call/stream/:url' element={<VideoMeetComponent />} />
 
         {/* <Route path="/skill/:id/updatepage" element={<SkillUpdatePage/>} /> */}
 
@@ -45,8 +50,10 @@ function App() {
           {/* <Route path="skill/:id/update" element={<SkillUpdatePage />} /> */}
         </Route>
       </Routes>
+      {/* <Route path='/stream/:url' element={<VideoMeetComponent />} /> */}
       <Toaster position="top-right" reverseOrder={false} />
-    </BrowserRouter>
+    {/* // </BrowserRouter> */}
+    </>
   );
 }
 

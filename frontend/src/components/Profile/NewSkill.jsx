@@ -1,49 +1,59 @@
-import React, { useCookies,useEffect, useState } from "react";
+import React, { useCookies, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-
 function AddNewSkill() {
-    const navigate=useNavigate();
-    // const user = localStorage.getItem("loginUser");
-    // const user = JSON.parse(localStorage.getItem("loginUser"));
-     const storedUser = localStorage.getItem("user");
-    const user = storedUser ? JSON.parse(storedUser) : null;
-     if (!user) {
+  const navigate = useNavigate();
+  // const user = localStorage.getItem("loginUser");
+  // const user = JSON.parse(localStorage.getItem("loginUser"));
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+  if (!user) {
     return <p>User not logged in</p>;
   }
-    console.log(user);
-    
-    const [formData,setFormData]=useState({
-      user:user._id
-     })
-     
-     const handleChange=(e)=>{
-      setFormData({
-        ...formData,   // keep previous data
-        [e.target.name]:e.target.value,  // add new data
-     })
-     }
+  console.log(user);
 
-     const handleSubmit = async(e)=>{
-      e.preventDefault();
-      try {
-        const token = localStorage.getItem('token');
-        const config = {
-          headers:{
-            'Authorization': `Bearer ${token}`
-          }
-        }
-        const res= await axios.post('http://localhost:3000/skill/newskill',formData,config)
-        console.log(res);
-        navigate("/home", { state: { msg: "Skill updated successfully!" }, replace: true });
-        toast.success(res.data.message);
-      } catch (error) {
-        console.log("new post request:",error);
-        toast.error(error.response.data);
+  const [formData, setFormData] = useState({
+    user: user._id,
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData, // keep previous data
+      [e.target.name]: e.target.value, // add new data
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("You are not Logged in! Please Login First");
+        return navigate("/login");
       }
-     }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const res = await axios.post(
+        "http://localhost:3000/skill/newskill",
+        formData,
+        config
+      );
+      console.log(res);
+      navigate("/home", {
+        state: { msg: "Skill updated successfully!" },
+        replace: true,
+      });
+      toast.success(res.data.message);
+    } catch (error) {
+      console.log("new post request:", error);
+      toast.error(error.response.data);
+    }
+  };
 
   return (
     <>

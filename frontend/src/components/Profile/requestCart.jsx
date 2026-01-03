@@ -23,11 +23,17 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function RequestCard({ key, data, onAccept, onReject }) {
+function RequestCard({ data, onAccept, onReject }) {
   const [value, setValue] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState();
   const [open, setOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  const isoDate = data.meetingDate;
+  const date = new Date(isoDate);
+  const readableDate = date.toLocaleString("en-IN", {
+  dateStyle: "medium",
+  timeStyle: "short",
+});
   return (
     <div className="flex items-center gap-4 p-4 bg-gray-800/40 backdrop-blur-md rounded-2xl border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 mr-4">
       {/* Profile Image */}
@@ -53,32 +59,38 @@ function RequestCard({ key, data, onAccept, onReject }) {
         <p className="text-blue-300 text-sm font-medium mt-1">
           {data.skillId?.skillName || "Topic not available"}
         </p>
-
-        {/* <p className="text-gray-400 text-xs mt-1 flex items-center gap-1">
-          {value || "No date"} • {data.time || "No time"}
-        </p> */}
+       { data.status==="accepted"?
+         <p className="text-gray-400 text-xs mt-1 flex items-center gap-1">
+          {readableDate}
+        </p>:
         <p className="text-gray-400 text-xs mt-1">
           {selectedDate
             ? selectedDate.format("DD MMM YYYY • hh:mm A")
             : "No date selected"}
-        </p>
+        </p>}
 
         {/* Buttons */}
         {user._id !== data.sender?._id && (
           <div className="flex gap-3 mt-4">
-            <button
-              onClick={() => onAccept(data._id, selectedDate)}
-              className="px-4 py-2 bg-green-600 text-white text-sm rounded-xl hover:bg-green-700 transition-all shadow-md"
-            >
-              Accept
-            </button>
+            {onAccept && (
+              <button
+                onClick={() => onAccept(data?._id, selectedDate, data.status)}
+                className="px-4 py-2 bg-green-600 text-white text-sm rounded-xl hover:bg-green-700 transition-all shadow-md"
+              >
+                Accept
+              </button>
+            )}
 
-            <button
-              onClick={() => onReject(data._id)}
-              className="px-4 py-2 bg-red-600 text-white text-sm rounded-xl hover:bg-red-700 transition-all shadow-md"
-            >
-              Reject
-            </button>
+            {onReject && (
+              <button
+                onClick={() => onReject(data._id)}
+                className="px-4 py-2 bg-red-500 text-white text-sm rounded-xl hover:bg-red-700 transition-all shadow-md"
+              >
+                Reject
+              </button>
+            )}
+
+
           </div>
         )}
       </div>

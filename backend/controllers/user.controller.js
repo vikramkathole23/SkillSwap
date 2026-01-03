@@ -64,7 +64,7 @@ try {
  const jwtToken = jwt.sign(
   { id: findUser._id, email: findUser.email },
   process.env.JWT_SECRET,
-  { expiresIn: "1h" }
+  { expiresIn: "1d" }
 ); 
 
   const user ={

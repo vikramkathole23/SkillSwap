@@ -40,6 +40,10 @@ function SkillBox({ data, sceleton }) {
     try {
       // const sender = JSON.parse( localStorage.getItem("user") )
       const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("You are not Logged in! Please Login First")
+       return navigate("/login")
+      }
       const config = {
           headers:{
             'Authorization': `Bearer ${token}`

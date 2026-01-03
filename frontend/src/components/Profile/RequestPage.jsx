@@ -4,7 +4,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import RequestCard from "./Cart";
+import RequestCard from "./requestCart";
 import TabButton from "../MySwap/TabButton";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -57,7 +57,7 @@ function MySessionsPage() {
     const fetchData = async () => {
       const user = JSON.parse(localStorage.getItem("user"));
       if (!user) {
-        return toast.error("you are not login!")
+        return toast.error("you are not login!");
       }
       try {
         const res = await axios.get(
@@ -70,19 +70,18 @@ function MySessionsPage() {
         const a = [];
         const r = [];
 
-      data.forEach(req => {
-        if (req.status === "pending") {
-           p.push(req)
-        } else if (req.status === "accepted") {
-          a.push(req)
-        } else {
-          r.push(req)
-        }
-      });
-        setPending(p)
-        setAccepted(a)
+        data.forEach((req) => {
+          if (req.status === "pending") {
+            p.push(req);
+          } else if (req.status === "accepted") {
+            a.push(req);
+          } else {
+            r.push(req);
+          }
+        });
+        setPending(p);
+        setAccepted(a);
         setRegected(r);
-         
       } catch (err) {
         console.error("Error fetching skills:", err);
       }
@@ -90,12 +89,20 @@ function MySessionsPage() {
     fetchData();
   }, []);
 
-  const onAccept = async (requestId, selectedDate) => {
+  const handleAccept = async (requestId, selectedDate, status) => {
     try {
+      // if (status==="accepted") {
+      //   return toast.error("You already send Request!")
+      // }
+      // console.log(selectedDate,requestId);
+      // console.log(status);
       const token = localStorage.getItem("token");
       if (!token) {
-        return toast.error("you are not login!")
+        return toast.error("you are not login!");
       }
+      console.log(accepted);
+      
+
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -116,11 +123,36 @@ function MySessionsPage() {
         config
       );
       console.log(res);
-      
+
       toast.success("request accepted!");
     } catch (error) {
       console.error("Error fetching skills:", error.response);
       toast.success(error.response.data);
+    }
+  };
+  const handleReject = async (requestId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return toast.error("you are not login!");
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const data = { status: "rejected" };
+
+      await axios.patch(
+        `http://localhost:3000/skill/swap/send/${requestId}`,
+        data,
+        config
+      );
+
+      toast.success("request rejected!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -145,21 +177,30 @@ function MySessionsPage() {
             <TabPanel value="1">
               <div className="Skill-section flex flex-wrap gap-3 mt-4 ">
                 {pending?.map((req) => (
-                  <RequestCard key={req._id} data={req} onAccept={onAccept} />
+                  <RequestCard
+                    key={req._id}
+                    data={req}
+                    onAccept={handleAccept}
+                    onReject={handleReject}
+                  />
                 ))}
               </div>
             </TabPanel>
             <TabPanel value="2">
               <div className="Skill-section flex flex-wrap gap-3 mt-4 ">
                 {accepted?.map((req) => (
-                  <RequestCard key={req._id} data={req} onAccept={onAccept} />
+                  <RequestCard
+                    key={req._id}
+                    data={req}
+                    onReject={handleReject}
+                  />
                 ))}
               </div>
             </TabPanel>
             <TabPanel value="3">
               <div className="Skill-section flex flex-wrap gap-3 mt-4 ">
                 {regected?.map((req) => (
-                  <RequestCard key={req._id} data={req} onAccept={onAccept} />
+                  <RequestCard key={req._id} data={req} />
                 ))}
               </div>
             </TabPanel>

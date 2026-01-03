@@ -1,6 +1,7 @@
-.meetVideoContainer {
+/* /* .meetVideoContainer {
     position: relative;
     height: 100vh;
+    width: 100%;
     background: rgb(1, 4, 48);
 }
 
@@ -27,13 +28,13 @@
 .conferenceView { 
 
     display: flex;
-    
     padding: 10px;
+    width: 80vw;
     gap: 10px;
 }
 
 .conferenceView  video {
-    width: 40vw;
+    width: 100%;
     height: 20vh;
     min-width: 30vw;
     border-radius: 10px;
@@ -47,6 +48,7 @@
     border-radius: 10px;
     width: 30vw;
     padding-inline: 20px;
+    margin-top: 1rem;
 }
 
 .chatContainer {
@@ -58,4 +60,574 @@
 .chattingArea {
     position: absolute;
     bottom: 0;
+} */
+
+
+
+
+
+/* .meetVideoContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  background: linear-gradient(135deg, #0c1022, #0d182f, #101f3c);
+  color: white;
+  overflow: hidden;
+} */
+
+/* ---------- CHAT PANEL ---------- */
+/* .chatRoom {
+  width: 320px;
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  animation: slideIn .3s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 18px;
+}
+
+.chattingDisplay {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding-right: 5px;
+}
+
+.chattingDisplay::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chattingDisplay::-webkit-scrollbar-thumb {
+  background: #3e92ff;
+  border-radius: 10px;
+}
+
+.chattingArea {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+} */
+
+/* ---------- LOCAL USER VIDEO ---------- */
+/* .meetUserVideo {
+  position: absolute;
+  bottom: 110px;
+  right: 20px;
+  width: 200px;
+  height: 120px;
+  border-radius: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: black;
+  object-fit: cover;
+  box-shadow: 0px 10px 30px rgba(0,0,0,.5);
+} */
+
+/* ---------- OTHER USERS GRID ---------- */
+/* .conferenceView {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 30px;
+  gap: 20px;
+}
+
+.conferenceView > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.conferenceView video {
+  width: 80%;
+  height: 50%;
+  border-radius: 18px;
+  object-fit: cover;
+  background: black;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: .3s;
+}
+
+.conferenceView video:hover {
+  transform: scale(1.02);
+  border-color: #3e92ff;
+}
+
+.conferenceView h4 {
+  text-align: center;
+  margin-top: 8px;
+} */
+
+/* ---------- CONTROLS ---------- */
+/* .buttonContainers {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  padding: 14px 30px;
+  background: rgba(0,0,0,.6);
+  border-radius: 40px;
+  border: 1px solid rgba(255,255,255,.15);
+  backdrop-filter: blur(10px);
+} */
+
+/* ---------- LOBBY ---------- */
+/* .lobbyContainer {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.lobbyContainer video {
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,.3);
+  object-fit: cover;
+} */
+
+
+/* 📱 MOBILE RESPONSIVE MODE (max 768px) */
+/* @media (max-width: 768px) {
+  .meetVideoContainer {
+    flex-direction: column;
+    height: 100vh;
+  } */
+
+  /* Chat becomes full screen slide drawer */
+  /* .chatRoom {
+    position: absolute;
+    width: 100%;
+    height: 55%;
+    bottom: 0;
+    border-right: none;
+    border-top: 1px solid rgba(255,255,255,.2);
+    animation: slideUp .35s ease forwards;
+  } */
+
+  /* @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  } */
+
+  /* Video grid stacks nicely */
+  /* .conferenceView {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 12px;
+  } */
+
+  /* .conferenceView video {
+    width: 100%;
+    height: 220px;
+    border-radius: 14px;
+  } */
+
+  /* Local video becomes small floating PIP */
+  /* .meetUserVideo {
+    width: 140px;
+    height: 90px;
+    bottom: 90px;
+    right: 10px;
+    border-radius: 12px;
+  } */
+
+  /* Controls become tighter + centered */
+  /* .buttonContainers {
+    bottom: 10px;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 30px;
+  }
+} */
+
+/* 📱 EXTRA SMALL DEVICES (max 480px) */
+/* @media (max-width: 480px) { */
+  /* .meetUserVideo {
+    width: 120px;
+    height: 78px;
+  }
+
+  .conferenceView video {
+    height: 200px;
+  }
+
+  .buttonContainers {
+    gap: 8px;
+    padding: 8px 14px;
+  }
+} */ 
+
+
+
+
+
+/* Meeting.module.css */
+
+/* Main layout wrapper */
+/* .meetVideoContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    overflow: hidden;
+} */
+
+/* 1. Video Grid Section */
+/* .conferenceView {
+    flex-grow: 1;
+    display: grid;
+    /* Responsive grid: tries to fit as many 300px+ videos as possible */
+    /* grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    gap: 15px;
+    padding: 20px;
+    padding-bottom: 100px; /* Space for bottom controls */
+    /* overflow-y: auto;
+    align-content: center;
+} */ 
+
+/* .videoWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.videoWrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.videoLabel {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+} */ 
+
+/* 2. Floating Control Bar */
+/* .buttonContainers {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    background: rgba(35, 35, 35, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+} */
+
+/* 3. Chat Sidebar */
+/* .chatRoom {
+    width: 350px;
+    min-width: 350px;
+    background: #181818;
+    border-left: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.chattingDisplay {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding-right: 5px;
+} */
+
+/* Hide scrollbar for cleaner look but keep functionality */
+/* .chattingDisplay::-webkit-scrollbar {
+    width: 6px;
+}
+.chattingDisplay::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+.chattingArea {
+    display: flex;
+    gap: 8px;
+    background: #222;
+    padding: 10px;
+    border-radius: 8px;
+} */
+
+/* Mobile Responsiveness */
+/* @media (max-width: 768px) {
+    .meetVideoContainer {
+        flex-direction: column;
+    }
+
+    .chatRoom {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2000;
+    }
+
+    .conferenceView {
+        grid-template-columns: 1fr;
+    }
+} */
+
+/* Lobby.module.css */
+/* .lobbyContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    padding: 20px;
+}
+
+.lobbyCard {
+    background-color: #2a2a2a;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    border: 1px solid #3a3a3a;
+}
+
+.lobbyCard h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.previewContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #444;
+}
+
+.previewContainer video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.previewLabel {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+} */
+
+/* Meeting.module.css */
+
+
+.videoCallContainer{
+  overflow-y: hidden;
+} 
+
+.videosSidebar {
+    width: 360px;
+    height: 90%;
+    color: #202124;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #202124; /* Google Meet dark grey */
+    overflow: hidden;
+    color: white;
+}
+
+/* Main Area: Contains Video Stage + Sidebar */
+.mainStage {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* 1. Video Grid Section */
+.videoGrid {
+    border: 2px solid brown;
+    flex: 1;
+    display: grid;
+    /* repeat(auto-fit, minmax(300px, 1fr)); */
+    grid-template-columns: 4fr;
+    grid-auto-rows: 1fr;
+    gap: 12px;
+    align-items: center;
+    justify-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Video Card */
+.videoWrapper {
+  border:  2px solid green;
+    width: 100%;
+    height: 100%;
+    max-height: 75vh;
+    background-color: #3c4043;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+
+.videoWrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* "Fill" the card like Google Meet */
+}
+
+.nameTag {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 2. Chat Sidebar (Google Meet style) */
+.chatSidebar {
+    width: 360px;
+    height: 90%;
+    background-color: white;
+    color: #202124;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.chatHeader {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.chatMessages {
+    flex: 1;
+    overflow-y: scroll;
+    height: 350px;
+    padding: 16px;
+}
+
+.chatInputArea {
+    padding: 16px;
+    display: flex;
+    gap: 8px;
+}
+
+/* 3. Bottom Control Bar */
+.bottomBar {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    position: relative;
+}
+
+.controlGroup {
+    display: flex;
+    gap: 12px;
+}
+
+/* Specific button styles */
+.iconBtn {
+    background-color: #3c4043 !important;
+    color: white !important;
+    border: 1px solid #5f6368 !important;
+}
+
+.iconBtnActive {
+    background-color: white !important;
+    color: #202124 !important;
+}
+
+.endCallBtn {
+    background-color: #ea4335 !important;
+    color: white !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mainStage {
+        flex-direction: column;
+    }
+    
+    .chatSidebar {
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        z-index: 10;
+    }
+
+    .videoGrid {
+        grid-template-columns: 1fr;
+    }
 }

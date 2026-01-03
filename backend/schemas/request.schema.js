@@ -22,6 +22,9 @@ const requestSchema = new mongoose.Schema({
     enum: ["pending", "accepted", "rejected"],
     default: "pending",
   },
+  meetingDate : {
+    type:String
+  }
 },{ timestamps: true });
 
 export default requestSchema;

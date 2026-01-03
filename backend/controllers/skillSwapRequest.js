@@ -1,6 +1,6 @@
 import meeting from "../models/meetindSchedule.model.js";
 import request from "../models/request.model.js";
-import ioConnection from "../sockets/index.socket.js";
+import connectToSocket from "../sockets/index.socket.js";
 
 export const sendSwapRequest = async (req, res) => {
   try {
@@ -65,9 +65,11 @@ export const updateRequestStatus = async (req, res) => {
     } else if (Request.status === "accepted") {
       return res.status(404).json("you already accepted this request!")
     }
-
+    // console.log(stringDate);
+    
+    Request.meetingDate = stringDate;
     Request.status = status;
-    await Request.save();
+    const result = await Request.save();
     
     const meetingObj = {
     requestId: id,
@@ -77,11 +79,11 @@ export const updateRequestStatus = async (req, res) => {
   };
     
     const createMeeting = await meeting.create(meetingObj)
-    // io.to(Request.sender._id.toString()).emit("new_request", {
-    //   message: `Your request accepted!`,
-    //   createMeeting,
-    //   id,
-    // });
+    io.to(Request.sender._id.toString()).emit("new_request", {
+      message: `Your request accepted!`,
+      createMeeting,
+      id,
+    });
     return res.status(201).json(createMeeting);
   } catch (error) {
     console.error(error);
