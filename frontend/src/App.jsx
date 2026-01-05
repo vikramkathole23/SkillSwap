@@ -24,7 +24,7 @@ function App() {
     {/* <Routes/>
        <Route path='/home/stream/:url' element={<VideoMeetComponent />} />
     <Routes/> */}
-     {location.pathname=='skillSwap-video-call/stream/:url'? <Navbar />:""}
+     {location.pathname=='skillSwap-video-call/stream/:url'?"" :<Navbar />}
      {/* <Navbar/> */}
       <Routes>
         <Route path="/home" element={<HomePage />} />
