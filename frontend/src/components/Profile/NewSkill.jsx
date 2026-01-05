@@ -2,6 +2,7 @@ import React, { useCookies, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import server from "../../../production";
 
 function AddNewSkill() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ function AddNewSkill() {
         },
       };
       const res = await axios.post(
-        "http://localhost:3000/skill/newskill",
+        `${server}/skill/newskill`,
         formData,
         config
       );

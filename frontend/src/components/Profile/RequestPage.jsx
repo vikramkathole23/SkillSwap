@@ -8,6 +8,7 @@ import RequestCard from "./requestCart";
 import TabButton from "../MySwap/TabButton";
 import axios from "axios";
 import toast from "react-hot-toast";
+import server from "../../../production";
 
 const requestsData = {
   accepted: [
@@ -61,7 +62,7 @@ function MySessionsPage() {
       }
       try {
         const res = await axios.get(
-          `http://localhost:3000/user/requests/${user._id}`
+          `${server}user/requests/${user._id}`
         );
 
         const data = res.data;
@@ -118,7 +119,7 @@ function MySessionsPage() {
         stringDate,
       };
       const res = await axios.patch(
-        `http://localhost:3000/skill/swap/send/${requestId}`,
+        `${server}/skill/swap/send/${requestId}`,
         data,
         config
       );
@@ -144,7 +145,7 @@ function MySessionsPage() {
       const data = { status: "rejected" };
 
       await axios.patch(
-        `http://localhost:3000/skill/swap/send/${requestId}`,
+        `${server}/skill/swap/send/${requestId}`,
         data,
         config
       );

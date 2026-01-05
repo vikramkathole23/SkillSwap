@@ -11,6 +11,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import SkillBox from "../Home/SkillBox";
 import UserSkill from "./userSkill";
+import server from "../../../production";
 
 function UserProfile() {
   const [value, setValue] = useState("1");
@@ -23,7 +24,7 @@ function UserProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/user/${id}`);
+        const res = await axios.get(`${server}/user/${id}`);
         setData(res.data.userObj);
         console.log(data);
       } catch (error) {

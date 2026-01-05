@@ -4,6 +4,7 @@ import { replace, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SkillDialogBox from "./SkillDialogBox";
 import toast from "react-hot-toast";
+import server from "../../../production";
 
 function SkillUpdatePage() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function SkillUpdatePage() {
     const fetchSkillData = async () => {
       try {
         
-        const res = await axios.get(`http://localhost:3000/skill/${id}`);
+        const res = await axios.get(`${server}skill/${id}`);
         setskillData(res.data);
         //   console.log(Data.data);
       } catch (error) {
@@ -48,7 +49,7 @@ function SkillUpdatePage() {
           }
         }
       const responce = await axios.patch(
-        `http://localhost:3000/skill/${id}`,
+        `${server}/skill/${id}`,
         skillData,
         config
       );

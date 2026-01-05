@@ -13,9 +13,10 @@ import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
+import server from "../../../production";
 // import server from '../environment';
 
-const server_url = "http://localhost:3000";
+const server_url = server;
 
 var connections = {};
 

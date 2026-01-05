@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import server from "../../../production";
 
 
 function LoginPage() {
@@ -29,7 +30,7 @@ function LoginPage() {
        try {
          // const api = "http://localhost:3000/user/signup";
          const res = await axios.post(
-         "http://localhost:3000/user/login",
+         `${server}/user/login`,
          formData,
          {
            headers: {

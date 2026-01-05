@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import skill from "../../../../backend/models/skill.model";
+import server from "../../../production";
 
 function SkillBox({ data, sceleton }) {
   const [open, setOpen] = React.useState(false);
@@ -29,7 +30,7 @@ function SkillBox({ data, sceleton }) {
 
   const fetchSkill = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/skill/${data._id}`);
+      const res = await axios.get(`${server}/skill/${data._id}`);
       setskillData(res.data);
     } catch (error) {
       console.error(error);
@@ -50,7 +51,7 @@ function SkillBox({ data, sceleton }) {
           }
         }
       const res = await axios.post(
-        `http://localhost:3000/skill/swap/send`,
+        `${server}/skill/swap/send`,
         {
           senderId: sender?._id,
           receiverId,
@@ -74,7 +75,7 @@ function SkillBox({ data, sceleton }) {
         },
       };
       const res = await axios.delete(
-        `http://localhost:3000/skill/${data._id}`,
+        `${server}/skill/${data._id}`,
         config
       );
       // console.log(data._id);

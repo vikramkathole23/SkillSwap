@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { socket } from '../socket';
+import  server from '../../../production.js'
 
 
 
@@ -43,7 +44,7 @@ function HomePage() {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/skill");
+      const res = await axios.get(`${server}/skill`);
       setData(res.data);
       // console.log(res.data);      
       setSceleton("true")
