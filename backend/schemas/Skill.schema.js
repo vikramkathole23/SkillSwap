@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const SkillSchema = new Schema(
+const skillSchema = new Schema(
   {
     skillName: {
       type: String,
@@ -42,4 +42,4 @@ const SkillSchema = new Schema(
   { timestamps: true }
 );
 
-export default SkillSchema;
+export default skillSchema;
