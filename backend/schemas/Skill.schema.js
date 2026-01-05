@@ -9,7 +9,7 @@ const SkillSchema = new Schema(
       trim: true,
     },
     image: {
-      type: String, // URL or file path
+      type: String, 
       required: false,
     },
     profession: {
