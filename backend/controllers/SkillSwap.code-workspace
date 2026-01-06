@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../New folder (2)"
+		}
+	],
+	"settings": {
+		"postman.settings.dotenv-detection-notification-visibility": false
+	}
+}
