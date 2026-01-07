@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify your SkillSwap account</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="./varifyMail.css" />
+</head>
+<body>
+
+  <table class="wrapper" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center" class="wrapper-padding">
+
+        <!-- Main Card -->
+        <table class="card" width="100%" cellpadding="0" cellspacing="0">
+          
+          <!-- Header -->
+          <tr>
+            <td align="center" class="header">
+              <h1 class="logo">SkillSwap 🔁</h1>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td class="content">
+              <p>Hey {{USER_NAME}},</p>
+
+              <p>
+                You’re almost in !  
+                Use the verification code below to confirm your email and activate your SkillSwap account.
+              </p>
+
+              <!-- Code Box -->
+              <div class="code-box">
+                <span class="code">
+                  Code is : {{CODE}}
+                </span>
+              </div>
+
+              <p>
+                This code will expire in <strong>10 minutes</strong>.  
+                If you didn’t request this, you can safely ignore this email.
+              </p>
+
+              <p class="signoff">
+                Happy learning,<br />
+                <strong>Team SkillSwap</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="footer">
+              © 2026 SkillSwap. All rights reserved.<br />
+              Learn. Swap. Grow.
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

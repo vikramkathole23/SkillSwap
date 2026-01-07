@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { LoginUser, registerUser,UserController, LogoutUser } from "../controllers/user.controller.js";
+import { LoginUser, registerUser,UserController, LogoutUser, verifyEmail } from "../controllers/user.controller.js";
 import {signupValidation,loginValidation} from "../validateSchema/authValidation.js" 
 import { getUserRequests } from "../controllers/skillSwapRequest.js";
 // import user from "../models/user.model.js"
@@ -7,7 +7,9 @@ import { getUserRequests } from "../controllers/skillSwapRequest.js";
 const router = Router();
 
 router.route("/signup")
-    .post(signupValidation,registerUser)   // Register New User
+    .post(signupValidation,registerUser) // Register New User
+router.route("/signup/verify-otp")
+    .post(verifyEmail)
 router.route("/login")
     .post(loginValidation,LoginUser)      // Login user
 router.route("/:id")

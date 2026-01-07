@@ -10,12 +10,14 @@ import MainLayout from "./components/Profile/MainLayout";
 import AddNewSkill from "./components/Profile/NewSkill";
 import RequestsPage from "./components/Profile/RequestPage";
 import UserProfileDetail from "./components/Profile/UserProfileDetail";
-import MySessionsPage from "./components/Profile/RequestPage"; // assuming this is correct
+import MySessionsPage from "./components/Profile/RequestPage";
 import SwapPage from "./components/MySwap/mySwap";
 import UserProfile from "./components/UserProfile/Userprofile";
 import SkillUpdatePage from "./components/Home/SkillUpdatePage";
 import ChatPage from "./components/chatPage";
 import VideoMeetComponent from "./components/videoStream/videoMeetPage";
+// import Otp from "./components/signup/otpComponent";
+import OTPVerification from "./components/signup/otpComponent";
 
 function App() {
   const location = useLocation();
@@ -31,6 +33,7 @@ function App() {
         <Route path="/my-swap" element={<SwapPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signup/verify-email" element={<OTPVerification />} />
         <Route path="/addnewskill" element={<AddNewSkill />} />
         <Route path="/home/:id" element={<UserProfile />} />
         <Route path="/skill/:id/update" element={<SkillUpdatePage />} />

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import bcrypt from "bcrypt";
+// import { number } from "joi";
 // const { Schema } = mongoose;
 
 const UserSchema = new Schema(
@@ -17,6 +18,13 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    isvarify:{
+      type:Boolean,
+      default:false
+    },
+    otp:{
+      type:Number,
     },
     // bio:{
     //     type:String,

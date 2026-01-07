@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useActionData, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import server from "../../../production";
 
@@ -11,6 +11,7 @@ function SignUpPage() {
   const [error,setError] = useState()
   const [formData,setFormData] = useState({
   })
+  const [dialog,setDialog] = useState(false)
 
   const handleOnChangeEvent = (e) => {
     const { name, value } = e.target;
@@ -27,7 +28,10 @@ function SignUpPage() {
     if (!fullName || !email || !password) {
       return toast.error("All field are required!")
     }
+     navigate("/signup/verify-email")
     try {
+
+
       // const api = "http://localhost:3000/user/signup";
       const res = await axios.post(
       `${server}/user/signup`,
@@ -39,7 +43,7 @@ function SignUpPage() {
       }
     );
       const {success,message,error} = res.data;
-      console.log(res);
+      console.log(error);
       
       if (success) {
         toast.success(message);
@@ -52,7 +56,9 @@ function SignUpPage() {
          toast.error("This email is already registered. please log in instead.")
       } else {
         toast.error("something went wrong. please try again. ")
+        console.log(error)
       }
+      console.log(error);
       
     }
     
@@ -65,7 +71,7 @@ function SignUpPage() {
           <h1 className="text-3xl font-bold text-white mb-4">Join SkillSwap</h1>
 
           <div className="Login-formcontainer text-start w-full">
-            <form action="" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
               {/* Full Name */}
               <label
                 htmlFor="fullname"
@@ -97,7 +103,6 @@ function SignUpPage() {
                 placeholder="Enter your Email"
                 className="w-full px-3 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
-
               {/* Password */}
               <label
                 htmlFor="password"

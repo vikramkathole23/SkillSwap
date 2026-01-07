@@ -185,3 +185,26 @@ body {
     z-index: 9999 !important;
   }
 }
+
+
+
+.verification-container {
+  margin: 24px 0;
+}
+
+.verification-input {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 18px;
+  margin: 0 4px;
+}
+
+.verification-input:focus {
+  border-color: #4c84ff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 132, 255, 0.2);
+}

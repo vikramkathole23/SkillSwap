@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 // import passport from "passport";
 // import createSecretToken from "../utils/SecretToken.js";
 import bcrypt from  "bcrypt";
+import sendMail from "./sendMail.controler.js";
 
 
 
@@ -25,8 +26,20 @@ export const registerUser = async (req, res) => {
 
   // register new User 
   const newUser = await User.create({email,password,fullName});
+
   // bcrypt password
   newUser.password = await bcrypt.hash(password,10);
+
+  // create a opt
+  const otp = Math.floor(Math.random()*1000)
+
+  // send mail for verifying user Email
+  sendMail(newUser.email,"verify your account",otp,fullName)
+
+  // otp save in db
+   newUser.otp=otp
+
+  // save user in db
   await newUser.save();
   return res
         .status(201)
@@ -37,6 +50,15 @@ export const registerUser = async (req, res) => {
         .status(500)
         .json({message: "Internal server error!", success: false ,error});
   }
+}
+
+export const verifyEmail = async (req , res) =>{
+    const {code} = req.body;
+    console.log( code)
+    return res
+        .status(201)
+        .json({message: "otp verify", success: true });
+
 }
 
 export const LoginUser = async ( req , res ) => {
