@@ -30,7 +30,7 @@ function App() {
      {location.pathname=='skillSwap-video-call/stream/:url'?"" :<Navbar />}
      {/* <Navbar/> */}
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/my-swap" element={<SwapPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
@@ -40,7 +40,7 @@ function App() {
            <AddNewSkill /> 
           </ProtectedRoute>
           } />
-        <Route path="/home/:id" element={
+        <Route path="/user/:id" element={
           <ProtectedRoute>
            <UserProfile />
           </ProtectedRoute>
@@ -50,9 +50,9 @@ function App() {
            <SkillUpdatePage /> 
           </ProtectedRoute>
           } />
-        <Route path="/home/user/:id" element={<UserProfile />} />
+        <Route path="/account/user/:id" element={<UserProfile />} />
         {/* <Route path="/home/user/:id/chat" element={<UserProfile />} /> */}
-        <Route path="/home/user/:id/chat" element={<ChatPage />} />
+        <Route path="/user/:id/chat" element={<ChatPage />} />
         <Route path='skillSwap-video-call/stream/:url' element={
           <ProtectedRoute>
            <VideoMeetComponent /> 

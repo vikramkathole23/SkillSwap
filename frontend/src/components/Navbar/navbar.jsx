@@ -55,11 +55,11 @@ function Navbar() {
     <>
       <div className="nav-container sticky z-50 top-0 border-b border-white flex justify-between h-[65px] px-[20px]">
         <div className="flex gap-8 items-center">
-          <Link to="/home" onClick={() => handleselectedlinks(o)}>
+          <Link to="/" onClick={() => handleselectedlinks(o)}>
             <h1 className="brand-Name text-3xl cursor-pointer">SkillSwap</h1>
           </Link>
           <ul className=" flex gap-8 items-center ">
-            <Link to="/home" onClick={() => handleselectedlinks(o)}>
+            <Link to="/" onClick={() => handleselectedlinks(o)}>
               <li className={selectedlink == 0 ? selected : ""}>Home</li>
             </Link>
             <Link to="/my-swap" onClick={() => handleselectedlinks(1)}>
