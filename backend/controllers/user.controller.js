@@ -10,6 +10,8 @@ import sendMail from "./sendMail.controler.js";
 export const registerUser = async (req, res) => {
   try {
     const { email, password, fullName } = req.body;
+    console.log(email);
+    
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password required" });
     }
@@ -33,7 +35,8 @@ export const registerUser = async (req, res) => {
 
     // create a opt
     const otp = Math.floor(1000 + Math.random() * 9000);
-
+    console.log(otp);
+    
     // send mail for verifying user Email
     sendMail(newUser.email, "verify your account", otp, fullName);
 
@@ -67,9 +70,9 @@ export const resendOtp = async (req,res) => {
     const user = await User.findOne({ email });
 
     const otp = Math.floor(1000 + Math.random() * 9000);
-
+    
     // send mail for verifying user Email
-    sendMail(user.email, "verify your account", otp, user.fullName);
+    await sendMail(user.email, "verify your account", otp, user.fullName);
 
     // otp save in db
     user.otp = otp;

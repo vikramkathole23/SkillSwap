@@ -4,6 +4,7 @@ import path from "path";
 
 const sendMail = async (toMail, subject, code,userName) => {
   try {
+    console.log(toMail,subject,code)
     const filePath = path.join(
       process.cwd(),
       "templates",
