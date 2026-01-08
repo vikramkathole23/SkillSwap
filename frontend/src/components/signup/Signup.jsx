@@ -28,11 +28,7 @@ function SignUpPage() {
     if (!fullName || !email || !password) {
       return toast.error("All field are required!")
     }
-     navigate("/signup/verify-email")
     try {
-
-
-      // const api = "http://localhost:3000/user/signup";
       const res = await axios.post(
       `${server}/user/signup`,
       formData,
@@ -48,7 +44,7 @@ function SignUpPage() {
       if (success) {
         toast.success(message);
         setTimeout(() => {
-          navigate("/login");
+          navigate("/signup/verify-email");
         }, 1000);
       } 
     } catch (error) {
@@ -61,8 +57,6 @@ function SignUpPage() {
       console.log(error);
       
     }
-    
-    
   }
   return (
     <>
@@ -89,7 +83,7 @@ function SignUpPage() {
               />
 
               {/* Email */}
-              <label
+                 <label
                 htmlFor="email"
                 className="block mb-1 text-sm font-medium text-gray-300 mt-4"
               >
@@ -103,6 +97,8 @@ function SignUpPage() {
                 placeholder="Enter your Email"
                 className="w-full px-3 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
+             
+
               {/* Password */}
               <label
                 htmlFor="password"

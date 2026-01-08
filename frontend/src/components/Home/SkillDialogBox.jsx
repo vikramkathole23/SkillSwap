@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
+import Skeleton from "react-loading-skeleton";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -17,7 +18,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function SkillDialogBox({ handleClose, isOpen, data }) {
+function SkillDialogBox({ handleClose, isOpen, isLoading, data }) {
   return (
     <>
       <React.Fragment>
@@ -25,18 +26,22 @@ function SkillDialogBox({ handleClose, isOpen, data }) {
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={isOpen}
-           PaperProps={{
-        sx: {
-          background: "linear-gradient(135deg, #1f1c2c, #928DAB)", // gradient bg
-          color: "#fff",
-          borderRadius: "20px",
-          boxShadow: "0px 8px 30px rgba(0,0,0,0.5)",
-          padding: "10px",
-        },
-      }}
+          PaperProps={{
+            sx: {
+              background: "linear-gradient(135deg, #1f1c2c, #928DAB)",
+              color: "#fff",
+              borderRadius: "20px",
+              boxShadow: "0px 8px 30px rgba(0,0,0,0.5)",
+              padding: "10px",
+            },
+          }}
         >
           <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-            <h1 className="text-2xl mb-2 cursor-pointer">{data.skillName}</h1>
+            {isLoading ? (
+              <Skeleton animation="wave" height={36} width="60%" />
+            ) : (
+              <h1 className="text-2xl">{data.skillName}</h1>
+            )}
           </DialogTitle>
           <IconButton
             aria-label="close"
@@ -56,29 +61,67 @@ function SkillDialogBox({ handleClose, isOpen, data }) {
                 <div className="inner-container flex justify-between ">
                   <div className="description ">
                     <div className="flex text-center username mb-2">
-                      <span className="text-center ml-2 cursor-pointer hover:text-red-700">
-                        {" "}
-                        {data.username}
-                      </span>
+                      {isLoading ? (
+                        <Skeleton animation="wave" width={120} height={22} />
+                      ) : (
+                        <span className="ml-2 cursor-pointer hover:text-red-400">
+                          {data.username}
+                        </span>
+                      )}
                     </div>
-                    <h1 className="text-2xl mb-2 cursor-pointer">
-                      {data.skillName}
-                    </h1>
-                    <p>{data.description}</p>
-                    <p className="text-black">Profession:{data.profession}</p>
-                    <p>Proficiency:{data.proficiency}</p>
+
+                    {isLoading ? (
+                      <Skeleton
+                        animation="wave"
+                        width="70%"
+                        height={32}
+                        className="my-2"
+                      />
+                    ) : (
+                      <h1 className="text-2xl my-2">{data.skillName}</h1>
+                    )}
+
+                    {isLoading ? (
+                      <>
+                        <Skeleton animation="wave" width="95%" />
+                        <Skeleton animation="wave" width="90%" />
+                        <Skeleton animation="wave" width="80%" />
+                      </>
+                    ) : (
+                      <p>{data.description}</p>
+                    )}
+
+                    {isLoading ? (
+                      <Skeleton animation="wave" width="60%" className="mt-2" />
+                    ) : (
+                      <p>Profession: {data.profession}</p>
+                    )}
+
+                    {isLoading ? (
+                      <Skeleton animation="wave" width={160} />
+                    ) : (
+                      <p>Proficiency: {data.proficiency}</p>
+                    )}
                     <div className="mt-[20px]">
-                      <button className="box-btn px-4 py-1">
-                        Request Swap
-                      </button>
+                      {isLoading ? (
+                        <Skeleton variant="rounded" width={140} height={36} />
+                      ) : (
+                        <button className="box-btn px-4 py-1">
+                          Request Swap
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className="Box-image h-[200px] ">
-                    <img
-                      className="h-full "
-                      src="https://framerusercontent.com/images/0YHMW01oxIdRY4oW3VsdPXOL8xQ.jpg "
-                      alt="img"
-                    />
+                    {isLoading ? (
+                      <Skeleton variant="rounded" width="200px" height="150px" />
+                    ) : (
+                      <img
+                        className="h-full w-full object-cover rounded-lg"
+                        src={data.image}
+                        alt="img"
+                      />
+                    )}
                   </div>
                 </div>
               </div>

@@ -2,16 +2,18 @@ import React, { use } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import server from "../../../production";
 
 
 function LoginPage() {
   const navigate=useNavigate();
+  const location = useLocation();
   const [error, setError] = useState(""); 
   const [formData,setFormData]=useState({
-  })
+  });
+  const from = location.state?.from || "/home";
 
   const handleOnChangeEvent = (e) => {
     const { name, value } = e.target;
@@ -39,13 +41,14 @@ function LoginPage() {
          }
        );
          const {success,message,error,jwtToken,user} = res.data;
+          console.log(error)
          if (success) {
           toast.success(message);
           localStorage.setItem('token' , jwtToken)
           localStorage.setItem("user", JSON.stringify( user));
 
           setTimeout(() => {
-            navigate("/home");
+            navigate(from);
           }, 1000);  
 
          } else if (error) {
@@ -57,8 +60,11 @@ function LoginPage() {
            toast.error(message)
          }
        } catch (error) {
+         console.log(error.response?.data?.message  );
+         if (error.response?.data?.message =="Email is not verify,Please verify first!"||"Please,Verify your Email!") {
+          navigate("/signup/verify-email")
+         }
           toast.error( error.response?.data?.message 
-           || error.response?.data?.error?.details?.[0]?.message
            || "Something went wrong.")
        }
        

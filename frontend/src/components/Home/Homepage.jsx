@@ -7,6 +7,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { socket } from '../socket';
 import  server from '../../../production.js'
+// import cardSkeleton from './CardSkelaton.jsx';
+import SkillBoxSkeleton from './CardSkelaton.jsx';
 
 
 
@@ -46,8 +48,11 @@ function HomePage() {
     try {
       const res = await axios.get(`${server}/skill`);
       setData(res.data);
-      // console.log(server);      
-      setSceleton("true")
+      // console.log(server);
+      if (data) {
+        setSceleton("true")
+      }      
+      
     } catch (err) {
       console.error("Error fetching skills:", err);
     }
@@ -75,6 +80,12 @@ function HomePage() {
               </div>
               <div className="Skill-Conyainer mt-8">
               <h1 className='text-3xl font-semibold mb-6'>Skills Available</h1>
+              {sceleton==="false" && <div>
+                {Array.from({ length: 8 }).map((_, index) => (  
+                  <SkillBoxSkeleton key={index} />
+                ))}
+              </div>
+              }
                {data.map((item,idx)=>(
                   <SkillBox data={item} key={idx} id={item.id} sceleton={sceleton}/>
                ))}

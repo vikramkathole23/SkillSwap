@@ -19,7 +19,7 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
-    isvarify:{
+    isVerify:{
       type:Boolean,
       default:false
     },

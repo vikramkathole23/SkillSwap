@@ -18,6 +18,7 @@ import ChatPage from "./components/chatPage";
 import VideoMeetComponent from "./components/videoStream/videoMeetPage";
 // import Otp from "./components/signup/otpComponent";
 import OTPVerification from "./components/signup/otpComponent";
+import ProtectedRoute from "./routProtecterMeddelware";
 
 function App() {
   const location = useLocation();
@@ -34,18 +35,38 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signup/verify-email" element={<OTPVerification />} />
-        <Route path="/addnewskill" element={<AddNewSkill />} />
-        <Route path="/home/:id" element={<UserProfile />} />
-        <Route path="/skill/:id/update" element={<SkillUpdatePage />} />
+        <Route path="/addnewskill" element={
+          <ProtectedRoute>
+           <AddNewSkill /> 
+          </ProtectedRoute>
+          } />
+        <Route path="/home/:id" element={
+          <ProtectedRoute>
+           <UserProfile />
+          </ProtectedRoute>
+          } />
+        <Route path="/skill/:id/update" element={
+          <ProtectedRoute>
+           <SkillUpdatePage /> 
+          </ProtectedRoute>
+          } />
         <Route path="/home/user/:id" element={<UserProfile />} />
         {/* <Route path="/home/user/:id/chat" element={<UserProfile />} /> */}
         <Route path="/home/user/:id/chat" element={<ChatPage />} />
-        <Route path='skillSwap-video-call/stream/:url' element={<VideoMeetComponent />} />
+        <Route path='skillSwap-video-call/stream/:url' element={
+          <ProtectedRoute>
+           <VideoMeetComponent /> 
+          </ProtectedRoute>
+          } />
 
         {/* <Route path="/skill/:id/updatepage" element={<SkillUpdatePage/>} /> */}
 
         {/* Main layout with nested routes */}
-        <Route path="/main" element={<MainLayout />}>
+        <Route path="/main" element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }>
           <Route path="my-sessions" element={<MySessionsPage />} />
           <Route path="profile" element={<UserProfileDetail />} />
           <Route path="addnewskill" element={<AddNewSkill />} />

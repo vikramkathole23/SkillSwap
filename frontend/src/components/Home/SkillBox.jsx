@@ -9,14 +9,16 @@ import { useParams } from "react-router-dom";
 import SkillDialogBox from "./SkillDialogBox";
 import { typographyClasses } from "@mui/material/Typography";
 import toast from "react-hot-toast";
-import Skeleton from "@mui/material/Skeleton";
+// import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import skill from "../../../../backend/models/skill.model";
 import server from "../../../production";
+import cardSkeleton from "./CardSkelaton";
 
 function SkillBox({ data, sceleton }) {
   const [open, setOpen] = React.useState(false);
   const [skillData, setskillData] = useState({});
+  const [loading , setLoading]=useState(true)
   const navigate = useNavigate();
   const sender = JSON.parse( localStorage.getItem("user") )
 
@@ -32,6 +34,7 @@ function SkillBox({ data, sceleton }) {
     try {
       const res = await axios.get(`${server}/skill/${data._id}`);
       setskillData(res.data);
+      setLoading(false)
     } catch (error) {
       console.error(error);
     }
@@ -101,6 +104,7 @@ function SkillBox({ data, sceleton }) {
           <SkillDialogBox
             handleClose={handleClose}
             isOpen={open}
+            isLoading={loading}
             data={skillData}
           />
           <div className="box-container my-4">
@@ -120,7 +124,7 @@ function SkillBox({ data, sceleton }) {
                   </span>
                   <span className="text-center ml-2 cursor-pointer hover:text-red-700">
                     {" "}
-                    {data.user?.fullName || <Skeleton count={10} />}
+                    {data.user?.fullName } 
                   </span>
                 </div>
                 <h1
@@ -130,9 +134,9 @@ function SkillBox({ data, sceleton }) {
                   }}
                   className="text-2xl mb-2 cursor-pointer"
                 >
-                  {data.skillName}
+                  {data.skillName }
                 </h1>
-                <p>{data.description}</p>
+                <p>{data.description }</p>
                 <div className="mt-[20px] ">
                   {
                     data.user?._id === sender?._id ? (
@@ -188,7 +192,7 @@ function SkillBox({ data, sceleton }) {
           </div>
         </>
       ) : (
-        <Skeleton variant="rectangular" width={210} height={118} />
+       < cardSkeleton/>
       )}
     </>
   );

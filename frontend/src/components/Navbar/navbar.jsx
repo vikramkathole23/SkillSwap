@@ -113,7 +113,7 @@ function Navbar() {
               <Link to="/main/my-sessions">
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Link>
-              {token ? (
+              {!token ? (
                 <>
                   <Link to="/signup">
                     <MenuItem onClick={handleClose}>Signup</MenuItem>

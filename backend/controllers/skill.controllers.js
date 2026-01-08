@@ -59,7 +59,7 @@ export const showSingleSkill = async (req, res) => {
     const skillData = await skill
       .findById(skillid)
       .populate("user", "fullName email");
-    console.log(skillData);
+    // console.log(skillData);
     if (!skillData) {
       return res.status(404).json({ message: "Skill not found" });
     }
