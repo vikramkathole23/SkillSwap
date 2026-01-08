@@ -11,7 +11,7 @@ export const registerUser = async (req, res) => {
   try {
     const { email, password, fullName } = req.body;
     console.log(email);
-    
+
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password required" });
     }
@@ -19,12 +19,10 @@ export const registerUser = async (req, res) => {
     //check user is already exist
     const isUserExist = await User.findOne({ email });
     if (isUserExist) {
-      return res
-        .status(409)
-        .json({
-          message: "User already exist!, You can login",
-          success: false,
-        });
+      return res.status(409).json({
+        message: "User already exist!, You can login",
+        success: false,
+      });
     }
 
     // register new User
@@ -36,7 +34,7 @@ export const registerUser = async (req, res) => {
     // create a opt
     const otp = Math.floor(1000 + Math.random() * 9000);
     console.log(otp);
-    
+
     // send mail for verifying user Email
     sendMail(newUser.email, "verify your account", otp, fullName);
 
@@ -45,12 +43,10 @@ export const registerUser = async (req, res) => {
 
     // save user in db
     await newUser.save();
-    return res
-      .status(201)
-      .json({
-        message: "User register successfull!, Now you can login.",
-        success: true,
-      });
+    return res.status(201).json({
+      message: "User register successfull!, Now you can login.",
+      success: true,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -58,19 +54,25 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const resendOtp = async (req,res) => {
+export const resendOtp = async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) {
-       return res
+      return res
         .status(201)
         .json({ message: "Please,Enter your Register Email!", success: true });
     }
 
     const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
 
     const otp = Math.floor(1000 + Math.random() * 9000);
-    
+
     // send mail for verifying user Email
     await sendMail(user.email, "verify your account", otp, user.fullName);
 
@@ -79,9 +81,8 @@ export const resendOtp = async (req,res) => {
 
     await user.save();
     return res
-        .status(201)
-        .json({ message: "Code is send, Check Your Email!", success: true });
-
+      .status(201)
+      .json({ message: "Code is send, Check Your Email!", success: true });
   } catch (error) {
     console.log(error);
   }
@@ -95,12 +96,10 @@ export const verifyEmail = async (req, res) => {
     const user = await User.findOne({ email });
     // console.log(user);
     if (email !== user.email) {
-      return res
-        .status(404)
-        .json({
-          message: "Please, enter your register Email! ",
-          success: false,
-        });
+      return res.status(404).json({
+        message: "Please, enter your register Email! ",
+        success: false,
+      });
     }
 
     // check otp
@@ -128,21 +127,17 @@ export const LoginUser = async (req, res) => {
     const { email, password } = req.body;
     const findUser = await User.findOne({ email });
     if (!findUser) {
-      return res
-        .status(404)
-        .json({
-          message: "User is not found with this email!",
-          success: false,
-        });
+      return res.status(404).json({
+        message: "User is not found with this email!",
+        success: false,
+      });
     }
     const errMessage = "Auth faild email or password wrong";
     if (!findUser.isVerify) {
-      return res
-        .status(403)
-        .json({
-          message: "Email is not verify,Please verify first!",
-          success: false,
-        });
+      return res.status(403).json({
+        message: "Email is not verify,Please verify first!",
+        success: false,
+      });
     }
     const isPassEquale = await bcrypt.compare(password, findUser.password);
     if (!isPassEquale) {
