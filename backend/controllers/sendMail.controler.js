@@ -2,9 +2,9 @@ import nodemailer from "nodemailer";
 import fs from "fs";
 import path from "path";
 
-const sendMail = async (toMail, subject, code,userName) => {
+const sendMail = async (toMail, subject, code, userName) => {
   try {
-    console.log(toMail,subject,code)
+    console.log(toMail, subject, code);
     const filePath = path.join(
       process.cwd(),
       "templates",
@@ -18,8 +18,8 @@ const sendMail = async (toMail, subject, code,userName) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "teamskillswap12@gmail.com",
-        pass: "vtvq pwsc zbti ubuv",
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
@@ -30,7 +30,7 @@ const sendMail = async (toMail, subject, code,userName) => {
       html,
     };
 
-      transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
       } else {
