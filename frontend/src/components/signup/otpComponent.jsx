@@ -5,6 +5,8 @@ import server from "../../../production";
 import { useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 import toast from "react-hot-toast";
+import Loader from "../Loader/loader";
+
 
 
 function OTPVerification() {
@@ -72,97 +74,76 @@ function OTPVerification() {
           },
         }
       );
+      setLoading(true)
+      
 
       if (response.data.success) {
         toast.success(response.data.message)
+        setLoading(false)
       }
     } catch (error) {
       toast.error(error.response.data.message)
-      console.log(error);
+      console.log(error.response.data);
     }
   }
 
   const resetCode = () => {};
 
-  return (
-    <>
-      <div className="Login-container flex justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-        <div className="flex flex-col text-center my-10 w-[500px] items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-lg">
-          <h1 className="text-3xl font-bold text-white mb-4">Join SkillSwap</h1>
+  return loading ? (
+    <Loader />
+  ) : (
+    <div className="Login-container flex justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+      <div className="flex flex-col text-center my-10 w-[500px] items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-lg">
+        <h1 className="text-3xl font-bold text-white mb-4">Join SkillSwap</h1>
 
-          <div className="Login-formcontainer text-start w-full">
-              <h2>Verify Your Account</h2>
-              <p>We've sent a verification code to your phone</p>
+        <div className="Login-formcontainer text-start w-full">
+          <h2>Verify Your Account</h2>
+          <p>We've sent a verification code to your phone</p>
 
-              {error && <div className="error-message">{error}</div>}
+          {error && <div className="error-message">{error}</div>}
 
-              {/* Email */}
-              <label
-                htmlFor="email"
-                className="block mb-1 text-sm font-medium text-gray-300 mt-4"
-              >
-               Enter your registered Email:
-              </label>
-              <input
-                type="email"
-                id="email"
-                onChange={handleOnChangeEvent}
-                name="email"
-                placeholder="Enter your Email"
-                className="w-full px-3 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
+          {/* Email */}
+          <label
+            htmlFor="email"
+            className="block mb-1 text-sm font-medium text-gray-300 mt-4"
+          >
+            Enter your registered Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            onChange={handleOnChangeEvent}
+            name="email"
+            placeholder="Enter your Email"
+            className="w-full px-3 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
 
-              
-              <ReactCodeInput
-                // ref={codeInputRef}..
-                fields={4}
-                type="number"
-                // onChange={handleChange}
-                onComplete={handleComplete}
-                className="verification-container"
-                inputClassNames="verification-input"
-                placeholder="0"
-              />
+          <ReactCodeInput
+            // ref={codeInputRef}..
+            fields={4}
+            type="number"
+            // onChange={handleChange}
+            onComplete={handleComplete}
+            className="verification-container"
+            inputClassNames="verification-input"
+            placeholder="0"
+          />
 
-              <div className="form-actions">
-                <button onClick={resetCode} className="mr-2 bg-green-400 rounded p-2 hover:bg-green-500">Clear</button>
-                <button onClick={ResendOtp} className="mr-2 bg-red-400 rounded p-2 hover:bg-red-500">Resend Code</button>
-              </div>
-
-              {/* Submit Button */}
-              {/* <button
-                type="submit"
-                className="w-full px-3 py-2 mt-6 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition duration-300 ease-in-out"
-              >
-                Sign Up
-              </button> */}
+          <div className="form-actions">
+            <button onClick={resetCode} className="mr-2 bg-green-400 rounded p-2 hover:bg-green-500">Clear</button>
+            <button onClick={ResendOtp} className="mr-2 bg-red-400 rounded p-2 hover:bg-red-500">Resend Code</button>
           </div>
+
+          {/* Submit Button */}
+          {/* <button
+            type="submit"
+            className="w-full px-3 py-2 mt-6 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition duration-300 ease-in-out"
+          >
+            Sign Up
+          </button> */}
         </div>
       </div>
-
-      {/* <div className="otp-form"> */}
-      {/* <h2>Verify Your Account</h2>
-      <p>We've sent a verification code to your phone</p>
-
-      <ReactCodeInput
-        // ref={codeInputRef}..
-        fields={4}
-        type="number"
-        // onChange={handleChange}
-        onComplete={handleComplete}
-        className="verification-container"
-        inputClassNames="verification-input"
-        placeholder="0"
-      />
-
-      <div className="form-actions">
-        <button onClick={resetCode}>Clear</button>
-        <button>Resend Code</button>
-      </div>
-
-      {error && <div className="error-message">{error}</div>} */}
-      {/* </div> */}
-    </>
+    </div>
   );
 }
 

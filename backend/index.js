@@ -20,7 +20,7 @@ const app = express();
 const server = createServer(app);
 const corsOption = {
   origin: process.env.Frontend_URL,
-  methods: ["GET", "POST","PUT", "PATCH", "DELETE"],
+  methods: ["GET", "POST","PUT", "PATCH", "DELETE","OPTIONS"],
   credentials: true,
 }
 const io = new Server(server,{
