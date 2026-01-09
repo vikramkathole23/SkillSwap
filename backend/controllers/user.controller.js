@@ -74,15 +74,15 @@ export const resendOtp = async (req, res) => {
     const otp = Math.floor(1000 + Math.random() * 9000);
 
     // send mail for verifying user Email
-    await sendMail(user.email, "verify your account", otp, user.fullName);
-
+    const mail = await sendMail(user.email, "verify your account", otp, user.fullName);
+     console.log(mail)
     // otp save in db
     user.otp = otp;
 
     await user.save();
     return res
       .status(201)
-      .json({ message: "Code is send, Check Your Email!", success: true });
+      .json({ message: "Code is send, Check Your Email!", success: true ,mail});
   } catch (error) {
     console.log(error);
   }

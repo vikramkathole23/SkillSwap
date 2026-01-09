@@ -19,7 +19,7 @@ const Port = process.env.PORT;
 const app = express();
 const server = createServer(app);
 const corsOption = {
-  origin: "http://localhost:5173",
+  origin: process.env.Frontend_URL,
   methods: ["GET", "POST","PUT", "PATCH", "DELETE"],
   credentials: true,
 }

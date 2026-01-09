@@ -16,15 +16,20 @@ const sendMail = async (toMail, subject, code, userName) => {
     html = html.replace("{{CODE}}", code);
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp-relay.brevo.com",
+      port: 587,
+      secure: false,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user:  process.env.BREVO_SMTP_LOGIN,
+        pass: process.env.BREVO_API_KEY,
       },
     });
+    await transporter.verify();
+// console.log("SMTP ready");
+
 
     let mailOptions = {
-      from: "teamskillswap12@gmail.com",
+      from: "SkillSwap <noreply@skillswap.com>",
       to: toMail,
       subject: subject,
       html,
@@ -35,8 +40,10 @@ const sendMail = async (toMail, subject, code, userName) => {
         console.log(error);
       } else {
         console.log("Email sent: " + info.response);
+        // return info;
       }
     });
+
   } catch (error) {
     console.log(error);
   }
