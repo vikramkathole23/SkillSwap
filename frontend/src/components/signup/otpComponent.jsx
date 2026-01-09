@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 import toast from "react-hot-toast";
 import Loader from "../Loader/loader";
+import dotenv from "dotenv";
+dotenv.config();
 
 
 
@@ -66,13 +68,12 @@ function OTPVerification() {
       const response = await axios.post(
         `${server}/user/signup/verify-otp/resend-otp`,
         { email },
-        
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+         {
+        headers: {
+          "api-key": process.env.BREVO_API_KEY,
+          "Content-Type": "application/json",
+        },
+      }
       );
       setLoading(true)
       

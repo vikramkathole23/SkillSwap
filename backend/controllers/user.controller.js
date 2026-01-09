@@ -62,7 +62,8 @@ export const resendOtp = async (req, res) => {
         .status(201)
         .json({ message: "Please,Enter your Register Email!", success: true });
     }
-
+    console.log(req);
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
