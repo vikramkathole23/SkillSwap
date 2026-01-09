@@ -20,7 +20,7 @@ const app = express();
 const server = createServer(app);
 const corsOption = {
   origin: process.env.Frontend_URL,
-  methods: ["GET", "POST","PUT", "PATCH", "DELETE","OPTIONS"],
+  methods: ["GET", "POST","PUT", "PATCH", "DELETE"],
   credentials: true,
 }
 const io = new Server(server,{
@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors(corsOption)
 );
-app.options("*",cors(corsOption))
+// app.options("*",cors(corsOption))
 app.use(cookieParser());
 app.use(express.json())
 
