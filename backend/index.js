@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors(corsOption)
 );
-app.options("*",cors(corsOption))
+// app.options("/*",cors(corsOption))
 app.use(cookieParser());
 app.use(express.json())
 
