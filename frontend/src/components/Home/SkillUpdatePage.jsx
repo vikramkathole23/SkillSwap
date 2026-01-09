@@ -54,7 +54,7 @@ function SkillUpdatePage() {
         config
       );
       // redirect when skill is updated successfully
-      navigate("/home", { state: { msg: "Skill updated successfully!" }, replace: true });
+      navigate("/", { state: { msg: "Skill updated successfully!" }, replace: true });
       toast.success("Skill Updated successfully!");
     } catch (error) {
       console.log("Request URL:", error.config.url);

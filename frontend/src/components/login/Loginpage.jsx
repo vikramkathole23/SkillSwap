@@ -13,7 +13,7 @@ function LoginPage() {
   const [error, setError] = useState(""); 
   const [formData,setFormData]=useState({
   });
-  const from = location.state?.from || "/home";
+  const from = location.state?.from || "/";
 
   const handleOnChangeEvent = (e) => {
     const { name, value } = e.target;

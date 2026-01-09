@@ -45,7 +45,7 @@ function AddNewSkill() {
         config
       );
       console.log(res);
-      navigate("/home", {
+      navigate("/", {
         state: { msg: "Skill updated successfully!" },
         replace: true,
       });
