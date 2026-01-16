@@ -18,8 +18,15 @@ import ioConnection from './sockets/index.socket.js';
 const Port = process.env.PORT;
 const app = express();
 const server = createServer(app);
+const allowedOrigins = process.env.Frontend_URL;
 const corsOption = {
-  origin: process.env.Frontend_URL,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST","PUT", "PATCH", "DELETE","OPTIONS"],
   credentials: true,
 }
