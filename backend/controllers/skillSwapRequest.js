@@ -74,8 +74,8 @@ export const updateRequestStatus = async (req, res) => {
     const meetingObj = {
     requestId: id,
     meetingTime: new Date(stringDate),
-    user1: Request.sender,   
-    user2: Request.receiver,
+    trainer: Request.sender,   
+    learner: Request.receiver,
   };
     
     const createMeeting = await meeting.create(meetingObj)

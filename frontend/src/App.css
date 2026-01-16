@@ -1,13 +1,22 @@
 @import "tailwindcss";
 
-body,
-html {
+body {
   background-color: #0f1a24;
   color: #ffffff;
+  margin: 0;
+  padding: 0;
 }
 .nav-container {
   background-color: #0f1a24;
+  width: 100%;
+  
 }
+
+.nav-links {
+  padding: 0;
+  margin: 0;
+}
+
 
 .links {
   cursor: pointer;
@@ -18,8 +27,14 @@ html {
 .notification-box {
   background-color: #304d69;
   border-radius: 10px;
+ } 
+
+ .selected {
+  border-bottom: 1px solid red;
+  color: #d92929;
+  padding-bottom: 5px;
 }
-.search input {
+/* .search input {
   background-color: #304d69;
   height: 40px;
   padding-left: 10px;
@@ -33,7 +48,35 @@ form input {
   padding-left: 10px;
   border-radius: 10px;
   /* width: 300px; */
+/* }  */
+
+/*  */
+.webView{
+  display: flex;
+  gap: 1rem;
+  justify-items: center;
 }
+
+.mobile-view-button {
+  display: none;
+}
+
+/* media queries for responsiveness */
+@media screen and (max-width:700px) {
+   .mobile-view-button{
+    display: inline-block ;
+    cursor: pointer;
+    justify-items: center;
+   }
+   .nav-right{
+    display: none;
+   }
+   .mobileView{
+    display: none;
+   }
+}
+
+/* style for skill card */
 
 .button {
   background-color: #d92929 !important;
@@ -72,11 +115,7 @@ p {
   margin-right: 20px;
   margin-bottom: 15px;
 }
-.selected {
-  border-bottom: 1px solid red;
-  color: #d92929;
-  padding-bottom: 5px;
-}
+
 .layout-links p:hover {
   border-bottom: 1px solid red;
   transform: scale(1.02);
@@ -87,6 +126,7 @@ p {
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 
 /* my swap page */
 .page {
@@ -126,6 +166,147 @@ p {
   font-size: 0.9rem;
   color: #cbd5e1;
 }
+
+
+/* ----- Skill Box ----- */
+.box-container {
+  transition: all 0.3s ease;
+  padding: 8px;
+}
+
+.box-container:hover {
+  transform: translateY(-4px) scale(1.001);
+  box-shadow: 0 10px 200px rgba(0, 200, 255, 0.03),
+              0 0 10px rgba(0, 200, 255, 0.1);
+  border: 1px solid rgba(0, 200, 255, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+@media (max-width: 2760px) {
+   .Box-image {
+    height: 200px;
+    width: 300px;
+  }
+}
+
+
+/*  TABLET (1024px )  */
+@media (max-width: 1024px) {
+  .inner-container {
+    gap: 16px;
+  }
+
+  .box-container{
+    border: 1px solid white;
+    padding: 8px;
+  }
+
+  .Box-image {
+    height: 200px;
+    width: 300px;
+  }
+
+  .Box-image img {
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .description h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* TABLETS & PHONES (768px & below)  */
+@media (max-width: 768px) {
+  .inner-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+  }
+
+  .description{
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .box-container{
+    border: 1px solid white;
+  }
+
+  .description {
+    width: 100%;
+  }
+
+  .Box-image {
+    width: 100%;
+    height: 220px;
+    margin-top: 12px;
+  }
+
+  .Box-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .username {
+    justify-content: flex-start;
+  }
+
+  .description .mt-\[20px\] {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .box-btn {
+    margin-left: 0 !important;
+  }
+}
+
+/*  MOBILE (480px & below)  */
+@media (max-width: 480px) {
+  .box-container {
+    padding: 10px;
+    border: 1px solid white;
+  }
+
+  .description h1 {
+    font-size: 1.1rem;
+  }
+
+  .description p {
+    font-size: 0.85rem;
+  }
+
+  .Box-image {
+    height: 180px;
+  }
+
+  .box-btn {
+    width: 100%;
+    padding: 8px 0;
+  }
+}
+
+/*  EXTRA SMALL (360px & below)  */
+@media (max-width: 360px) {
+  .description h1 {
+    font-size: 1rem;
+  }
+  .box-container{
+    border: 1px solid white;
+  }
+
+  .Box-image {
+    height: 150px;
+  }
+
+  
+}
+
 
 /* chatting page */
 body {
@@ -208,3 +389,5 @@ body {
   outline: none;
   box-shadow: 0 0 0 2px rgba(76, 132, 255, 0.2);
 }
+
+

@@ -10,11 +10,11 @@ const meetingScheduleSchema = new mongoose.Schema({
     default: "" ,
     required:true
   },
-  user1:{
+  trainer:{
     type: mongoose.Schema.Types.ObjectId, 
     ref: "User"
   },
-  user2:{
+  learner:{
      type: mongoose.Schema.Types.ObjectId, 
     ref: "User"
   }

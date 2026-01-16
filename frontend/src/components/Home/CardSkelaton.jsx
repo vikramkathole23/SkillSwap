@@ -4,14 +4,12 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const SkillBoxSkeleton = () => {
   return (
-    <div className="box-container ">
-      <div className="inner-container flex justify-between gap-4">
-
+    <div className="box-container my-4">
+      <div className="inner-container flex justify-between ">
         {/* Left Content */}
-        <div className="description flex-1">
-
+        <div className="description "> 
           {/* User row */}
-          <div className="flex items-center mb-3">
+          <div className="flex items-center mb-2">
             <Skeleton circle width={30} height={30} />
             <div className="ml-2">
               <Skeleton width={50} height={16} />
@@ -32,8 +30,8 @@ const SkillBoxSkeleton = () => {
         </div>
 
         {/* Image */}
-        <div className="Box-image h-[200px] w-[200px]">
-          <Skeleton height={200} width={300} />
+        <div className="Box-image w-[200] h-[100] ">
+          <Skeleton height="100%" width="100%" />
         </div>
       </div>
     </div>

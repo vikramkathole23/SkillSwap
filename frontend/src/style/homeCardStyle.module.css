@@ -1,0 +1,110 @@
+.box-container {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+}
+
+.inner-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Left side */
+.description {
+  flex: 1;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.username {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.username:hover {
+  color: #dc2626;
+}
+
+.skill-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.skill-title:hover {
+  color: #4f46e5;
+}
+
+.skill-desc {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Buttons */
+.action-row {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.box-btn {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.box-btn:hover {
+  opacity: 0.9;
+}
+
+/* Image */
+.box-image {
+  width: 220px;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.box-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+@media (max-width: 900px) {
+  .inner-container {
+    flex-direction: column;
+  }
+
+  .box-image {
+    width: 100%;
+    height: 220px;
+  }
+}
+
+@media (max-width: 500px) {
+  .skill-title {
+    font-size: 18px;
+  }
+
+  .box-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

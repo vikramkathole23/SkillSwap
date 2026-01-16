@@ -1,0 +1,7 @@
+
+/* styling for website view  */
+.webView{
+  display: flex;
+  gap: 1rem;
+  justify-items: center;
+}

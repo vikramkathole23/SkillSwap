@@ -1,23 +1,21 @@
-import React from 'react';
-import SkillBox from './SkillBox';
-import { useEffect,useState } from 'react';
+import React from "react";
+import SkillBox from "./SkillBox";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { socket } from '../socket';
-import  server from '../../../production.js'
+import axios from "axios";
+import toast from "react-hot-toast";
+import { socket } from "../socket";
+import server from "../../../production.js";
 // import cardSkeleton from './CardSkelaton.jsx';
-import SkillBoxSkeleton from './CardSkelaton.jsx';
-
-
+import SkillBoxSkeleton from "./CardSkelaton.jsx";
 
 function HomePage() {
   const [data, setData] = useState([]);
-  const [sceleton,setSceleton]=useState("false")
-  const navigate=useNavigate();
+  const [sceleton, setSceleton] = useState("false");
+  const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  
+
   // useEffect(() => {
   //   const verifyCookie = async () => {
   //     if (!cookies.token) {
@@ -42,57 +40,68 @@ function HomePage() {
   //   removeCookie("token");
   //   navigate("/signup");
   // };
-  
+
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const res = await axios.get(`${server}/skill`);
-      setData(res.data);
-      // console.log(server);
-      if (data) {
-        setSceleton("true")
-      }      
-      
-    } catch (err) {
-      console.error("Error fetching skills:", err);
-    }
-  };
-  fetchData();
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${server}/skill`);
+        setData(res.data);
+        // console.log(server);
+        if (data) {
+          setSceleton("true");
+        }
+      } catch (err) {
+        console.error("Error fetching skills:", err);
+      }
+    };
+    fetchData();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     socket.connect();
-    const user = JSON.parse(localStorage.getItem("user"))
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user?._id) {
-    socket.emit("register", user._id);
-  }
+      socket.emit("register", user._id);
+    }
 
-  socket.on("new_request", (data) => {
-    console.log("Notification received:", data);
-    toast.success(data?.message);
-  });
-  },[])
+    socket.on("new_request", (data) => {
+      console.log("Notification received:", data);
+      toast.success(data?.message);
+    });
+  }, []);
 
-    return ( 
-        <>
-           <div className="home-container mx-[10%] p-2 ">
-              <div className="search-category-container">
-              </div>
-              <div className="Skill-Conyainer mt-8">
-              <h1 className='text-3xl font-semibold mb-6'>Skills Available</h1>
-              {sceleton==="false" && <div>
-                {Array.from({ length: 8 }).map((_, index) => (  
-                  <SkillBoxSkeleton key={index} />
-                ))}
-              </div>
-              }
-               {data.map((item,idx)=>(
-                  <SkillBox data={item} key={idx} id={item.id} sceleton={sceleton}/>
-               ))}
-               </div>
-           </div>
-        </>
-     );
+  return (
+    <>
+      <div className="home-container">
+        <div className="search-category-container">
+          {/* search + category filters */}
+        </div>
+
+        <div className="skill-container w-100%">
+          {/* <h1 className="skill-title">Skills Available</h1> */}
+
+          {sceleton === "false" && (
+            <div className="skill-grid m-8">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <SkillBoxSkeleton key={index} />
+              ))}
+            </div>
+          )}
+
+          <div className="skill-grid mx-14">
+            {data.map((item, idx) => (
+              <SkillBox
+                data={item}
+                key={idx}
+                id={item.id}
+                sceleton={sceleton}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default HomePage;

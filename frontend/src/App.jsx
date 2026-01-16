@@ -1,6 +1,8 @@
 import React from "react";
 import {useLocation, BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+// import "./style/home.responsive.module.css"
+// import "./style/homeCardStyle.module.css"
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/navbar";
 import LoginPage from "./components/login/Loginpage";

@@ -123,7 +123,6 @@ function SkillBox({ data, sceleton }) {
                     </p>
                   </span>
                   <span className="text-center ml-2 cursor-pointer hover:text-red-700">
-                    {" "}
                     {data.user?.fullName } 
                   </span>
                 </div>

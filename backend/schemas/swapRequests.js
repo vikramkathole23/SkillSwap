@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const SkillRequestSchema=new Schema({
+const swapRequest=new Schema({
     sender_id:{
         type:Schema.Types.ObjectId,
         Ref:'user',
@@ -25,4 +25,4 @@ const SkillRequestSchema=new Schema({
 
 },{timestamps:true})
 
-export default SkillRequestSchema;
+export default swapRequest;

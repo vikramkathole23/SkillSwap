@@ -35,7 +35,7 @@ const sendMail = async (toMail, subject, code, userName) => {
       html,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    const mail = await transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
       } else {
@@ -43,7 +43,8 @@ const sendMail = async (toMail, subject, code, userName) => {
         // return info;
       }
     });
-
+    console.log(mail);
+    
   } catch (error) {
     console.log(error);
   }
