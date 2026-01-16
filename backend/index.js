@@ -20,22 +20,13 @@ const app = express();
 const server = createServer(app);
 // const allowedOrigins = process.env.Frontend_URL;
 const allowedOrigins = [
-  process.env.Frontend_URL_1,
-  process.env.Frontend_URL_2,
+  process.env.FRONTEND_URL_1,
+  process.env.FRONTEND_URL_2,
 ].filter(Boolean);
 
 
 const corsOption = {
-  origin:(origin, callback) => {
-    // allow Postman / mobile / server-to-server
-    if (!origin) return callback(null, true);
-    console.log("Allowed:", origin);
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin:"https://skillswap-jynl.onrender.com",
   methods: ["GET", "POST","PUT", "PATCH", "DELETE","OPTIONS"],
   credentials: true,
 }
