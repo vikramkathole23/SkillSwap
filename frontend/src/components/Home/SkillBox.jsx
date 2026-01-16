@@ -11,7 +11,6 @@ import { typographyClasses } from "@mui/material/Typography";
 import toast from "react-hot-toast";
 // import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
-import skill from "../../../../backend/models/skill.model";
 import server from "../../../production";
 import cardSkeleton from "./CardSkelaton";
 
