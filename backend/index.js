@@ -18,10 +18,18 @@ import ioConnection from './sockets/index.socket.js';
 const Port = process.env.PORT;
 const app = express();
 const server = createServer(app);
-const allowedOrigins = process.env.Frontend_URL;
+// const allowedOrigins = process.env.Frontend_URL;
+const allowedOrigins = [
+  process.env.Frontend_URL_1,
+  process.env.Frontend_URL_2,
+].filter(Boolean);
+
+
 const corsOption = {
-  origin: function (origin, callback) {
-     if (!origin) return callback(null, true);
+  origin:(origin, callback) => {
+    // allow Postman / mobile / server-to-server
+    if (!origin) return callback(null, true);
+    console.log("Allowed:", origin);
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
