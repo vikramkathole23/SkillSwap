@@ -95,7 +95,7 @@ function LoginPage() {
   return (
     <>
       <div className="Login-container flex justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black ">
-        <div className="flex flex-col text-center my-10 mx-10 w-[400px] items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-lg">
+        <div className="inner-Login-container flex flex-col text-center my-10 mx-10 w-[400px] items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-lg">
           <h1 className="text-3xl font-bold text-white mb-2">Join SkillSwap</h1>
           <p className="text-gray-400 text-sm mb-6">
             Learn new skills or share your expertise with a global community.
