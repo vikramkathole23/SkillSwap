@@ -15,7 +15,7 @@ import server from "../../../production";
 import cardSkeleton from "./CardSkelaton";
 
 function SkillBox({ data, sceleton }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [skillData, setskillData] = useState({});
   const [loading , setLoading]=useState(true)
   const navigate = useNavigate();
