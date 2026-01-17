@@ -81,7 +81,10 @@ function LoginPage() {
  
   return loading ? (
     <>
-      <h1>Loading...</h1>
+     <div className="flex justify-center items-center">
+      <h1>Loading...</h1>s
+     </div>
+      
     </>
   ) : (
     <> 
