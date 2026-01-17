@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import { Server } from 'socket.io';
 import {createServer} from 'http'
 import ioConnection from './sockets/index.socket.js';
+import Frontend_URL from './production.js';
 
 
 const Port = process.env.PORT;
@@ -22,11 +23,11 @@ const server = createServer(app);
 const allowedOrigins = [
   process.env.FRONTEND_URL_1,
   process.env.FRONTEND_URL_2,
-].filter(Boolean);
-
+]
+// "https://skillswap-jynl.onrender.com"
 
 const corsOption = {
-  origin:"https://skillswap-jynl.onrender.com",
+  origin:Frontend_URL,
   methods: ["GET", "POST","PUT", "PATCH", "DELETE","OPTIONS"],
   credentials: true,
 }
@@ -34,6 +35,7 @@ const io = new Server(server,{
   cors : corsOption ,
   transports: ["websocket", "polling"],
 })
+// console.log(Frontend_URL); 
 
 ConnectDB();
 

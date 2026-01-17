@@ -46,7 +46,7 @@ function HomePage() {
       try {
         const res = await axios.get(`${server}/skill`);
         setData(res.data);
-        // console.log(server);
+        console.log(res);
         if (data) {
           setSceleton("true");
         }

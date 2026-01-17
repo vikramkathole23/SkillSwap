@@ -1,11 +1,11 @@
-import React, { use } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import server from "../../../production";
-
+import { Loader } from "../loader";
 
 function LoginPage() {
   const navigate=useNavigate();
@@ -13,6 +13,7 @@ function LoginPage() {
   const [error, setError] = useState(""); 
   const [formData,setFormData]=useState({
   });
+  const [loading,setLoading]=useState(false)
   const from = location.state?.from || "/";
 
   const handleOnChangeEvent = (e) => {
@@ -29,8 +30,10 @@ function LoginPage() {
        if (!email || !password) {
          return toast.error("All field are required!")
        }
+       setLoading(true)
        try {
          // const api = "http://localhost:3000/user/signup";
+         
          const res = await axios.post(
          `${server}/user/login`,
          formData,
@@ -46,7 +49,7 @@ function LoginPage() {
           toast.success(message);
           localStorage.setItem('token' , jwtToken)
           localStorage.setItem("user", JSON.stringify( user));
-
+           setLoading(false)
           setTimeout(() => {
             navigate(from);
           }, 1000);  
@@ -61,39 +64,27 @@ function LoginPage() {
          }
        } catch (error) {
          console.log(error.response?.data?.message  );
-         if (error.response?.data?.message =="Email is not verify,Please verify first!"||"Please,Verify your Email!") {
+         if (error.response?.data?.message ==="Email is not verify,Please verify first!"||"Please,Verify your Email!") {
+          // console.log();
+          
           navigate("/signup/verify-email")
-         }
+         } else{
           toast.error( error.response?.data?.message 
            || "Something went wrong.")
+         }
+          
        }
        
        
      }
 
-  //  const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await axios.post("http://localhost:3000/user/login",formData);
-  //     console.log(res);
-      
-  //       navigate("/home", { state: { msg: "User login successfully! 🎉" }, replace: true });
-  //     toast.success("User login successfully! ");
-  //   } catch (error) {
-  //     if (error.response?.status === 409) {
-  //     navigate("/login", { state: { msg: error.response?.message }, replace: true });
-  //     console.log(error);
-      
-  //     toast.success( error.response.data.message );
-  //     }else{
-  //       setError("Unexpected error. Please try again later.")
-  //     }
-  //     // console.log(error);
-  //   }
-  // }
  
-  return (
+  return loading ? (
     <>
+      <h1>Loading...</h1>
+    </>
+  ) : (
+    <> 
       <div className="Login-container flex justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black ">
         <div className="inner-Login-container flex flex-col text-center my-10 mx-10 w-[400px] items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-lg">
           <h1 className="text-3xl font-bold text-white mb-2">Join SkillSwap</h1>
