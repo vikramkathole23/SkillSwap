@@ -14,6 +14,8 @@ import { Server } from 'socket.io';
 import {createServer} from 'http'
 import ioConnection from './sockets/index.socket.js';
 import Frontend_URL from './production.js';
+import path from "path";
+
 
 
 const Port = process.env.PORT;
@@ -82,6 +84,17 @@ app.use("/user",userRouter)
 // app.all('*', (req, res, next) => {
 //   next(new expressError(404, "Page not found"));
 // });
+
+const __dirname = path.resolve();
+
+// Serve frontend build
+app.use(express.static(path.join(__dirname, "dist")));
+
+// React SPA fallback
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 
 // error handlemiddleware 
 app.use((err,req,res,next)=>{
