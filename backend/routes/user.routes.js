@@ -15,8 +15,9 @@ router.route("/signup/verify-otp/resend-otp")
     .post(resendOtp)
 router.route("/login")
     .post(loginValidation,IsEmailVerify,LoginUser)      // Login user
-router.route("/:id")
-    .get(UserController)   // find user
 router.route("/requests/:id")
     .get(getUserRequests)
+router.route("/:id")
+    .get(UserController)   // find user
+
 export default router;

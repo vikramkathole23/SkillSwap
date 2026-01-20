@@ -66,14 +66,6 @@ const sessionOptions={
 }
 app.use(session(sessionOptions))
  
-// app.use(passport.initialize());  
-// app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()))
-
-// passport.use(User.createStrategy());
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
 // Skill routes 
 app.use("/skill",skillRouter)
 
@@ -81,19 +73,27 @@ app.use("/skill",skillRouter)
 app.use("/user",userRouter)
 
 // page not found error
-// app.all('*', (req, res, next) => {
+// app.get('*', (req, res, next) => {
 //   next(new expressError(404, "Page not found"));
 // });
 
 const __dirname = path.resolve();
 
 // Serve frontend build
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(
+  express.static(
+    path.join(__dirname, "../frontend/dist")
+  )
+);
 
 // React SPA fallback
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "../frontend/dist/index.html")
+  );
 });
+
+
 
 
 // error handlemiddleware 
