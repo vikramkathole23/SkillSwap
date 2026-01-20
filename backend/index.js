@@ -93,9 +93,6 @@ app.use((req, res) => {
   );
 });
 
-
-
-
 // error handlemiddleware 
 app.use((err,req,res,next)=>{
   const {statusCode=500,message="something went wrong"}=err

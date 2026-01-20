@@ -28,7 +28,7 @@ function OTPVerification() {
     try {
       // Example API call
       const response = await axios.post(
-        `${server}/user/signup/verify-otp`,
+        `${server}/user/signup/verify-email`,
         { email,code },
         
         {

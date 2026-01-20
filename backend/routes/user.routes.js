@@ -9,7 +9,7 @@ const router = Router();
 
 router.route("/signup")
     .post(signupValidation,registerUser) // Register New User
-router.route("/signup/verify-otp")
+router.route("/signup/verify-email")
     .post(verifyEmail)
 router.route("/signup/verify-otp/resend-otp")
     .post(resendOtp)
