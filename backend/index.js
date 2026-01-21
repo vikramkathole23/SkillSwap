@@ -15,6 +15,11 @@ import {createServer} from 'http'
 import ioConnection from './sockets/index.socket.js';
 import Frontend_URL from './production.js';
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 
 
@@ -73,24 +78,11 @@ app.use("/skill",skillRouter)
 app.use("/user",userRouter)
 
 // page not found error
-// app.get('*', (req, res, next) => {
-//   next(new expressError(404, "Page not found"));
-// });
 
-const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "dist")));
 
-// Serve frontend build
-app.use(
-  express.static(
-    path.join(__dirname, "../frontend/dist")
-  )
-);
-
-// React SPA fallback
-app.use((req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../frontend/dist/index.html")
-  );
+app.use( (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // error handlemiddleware 

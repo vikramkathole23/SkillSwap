@@ -21,6 +21,7 @@ function Navbar() {
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,6 +30,8 @@ function Navbar() {
   };
 
   const handlenavbarManuClose = () => {
+    // console.log(user.email);
+
     setIsOpen(!isOpen);
   };
 
@@ -99,8 +102,19 @@ function Navbar() {
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
               >
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar
+                  alt={user ? user.name : ""}
+                  src="/static/images/avatar/1.jpg"
+                />
+                {user ? (
+                  <p className="px-1">
+                    {user.email.slice(0, 7).toLowerCase() + "...."}
+                  </p>
+                ) : (
+                  ""
+                )}
               </Button>
+              <h4>{}</h4>
               <Menu
                 id="demo-positioned-menu"
                 aria-labelledby="demo-positioned-button"
@@ -110,12 +124,7 @@ function Navbar() {
                 anchorOrigin={{ vertical: "top", horizontal: "left" }}
                 transformOrigin={{ vertical: "top", horizontal: "left" }}
               >
-                <Link to="/main/profile">
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                </Link>
-                <Link to="/main/my-sessions">
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Link>
+                {user ? <p className="px-2 text-black">{user.email}</p> : ""}
                 {!token ? (
                   <>
                     <Link to="/signup">
@@ -127,6 +136,12 @@ function Navbar() {
                   </>
                 ) : (
                   <>
+                    <Link to="/main/profile">
+                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    </Link>
+                    <Link to="/main/my-sessions">
+                      <MenuItem onClick={handleClose}>My account</MenuItem>
+                    </Link>
                     <MenuItem onClick={logout}>Logout</MenuItem>
                   </>
                 )}
@@ -139,7 +154,11 @@ function Navbar() {
               <FaBars size={30} />
             </button>
             {isOpen && (
-              <NavbarManu isOpen={isOpen} handleClose={handlenavbarManuClose} logout={logout} />
+              <NavbarManu
+                isOpen={isOpen}
+                handleClose={handlenavbarManuClose}
+                logout={logout}
+              />
             )}
           </div>
         </div>

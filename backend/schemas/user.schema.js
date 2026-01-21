@@ -26,16 +26,19 @@ const UserSchema = new Schema(
     otp:{
       type:Number,
     },
-    // bio:{
-    //     type:String,
+    about_me:{
+        type:String,
 
-    // },
-    // location:{
-    //     type:String,
-    // },
-    // profile_pic:{
-    //     type:String,
-    // }
+    },
+    profession:{
+        type:String,
+    },
+    category:{
+      type:String,
+    },
+    profile_pic:{
+        type:String,
+    },
     skills: 
       {
         type: [mongoose.Schema.Types.ObjectId],

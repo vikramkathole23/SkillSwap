@@ -63,7 +63,7 @@ export const resendOtp = async (req, res) => {
         .json({ message: "Please,Enter your Register Email!", success: true });
     }
     // console.log(req);
-    
+
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
@@ -75,15 +75,24 @@ export const resendOtp = async (req, res) => {
     const otp = Math.floor(1000 + Math.random() * 9000);
 
     // send mail for verifying user Email
-    const mail = await sendMail(user.email, "verify your account", otp, user.fullName);
-     console.log(mail)
+    const mail = await sendMail(
+      user.email,
+      "verify your account",
+      otp,
+      user.fullName,
+    );
+    console.log(mail);
     // otp save in db
     user.otp = otp;
 
     await user.save();
     return res
       .status(201)
-      .json({ message: "Code is send, Check Your Email!", success: true ,mail});
+      .json({
+        message: "Code is send, Check Your Email!",
+        success: true,
+        mail,
+      });
   } catch (error) {
     console.log(error);
   }
@@ -148,7 +157,7 @@ export const LoginUser = async (req, res) => {
     const jwtToken = jwt.sign(
       { id: findUser._id, email: findUser.email },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "1d" },
     );
 
     const user = {
@@ -345,4 +354,65 @@ export const LogoutUser = (req, res) => {
   }
 };
 
-export const UserController = (req, res, next) => {};
+export const getUserDetail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res
+        .status(404)
+        .json({ message: "please send user Id!", success: false });
+    }
+    const user = await User.findById(id).select("-password -isVerify  -otp");
+    if (!user) {
+      return res
+        .status(404)
+        .json({
+          message: "user not exist please send valid id or login first!",
+          success: false,
+        });
+    }
+    // console.log(user);
+    return res
+      .status(200)
+      .json({ message: "user geted!", success: true, user });
+  } catch (error) {
+    // console.log(error)
+    return res.status(500).json({ message: "server error", success: false });
+  }
+};
+
+export const editUserDeteil = async (req, res) => {
+  try {
+    const { user_id, fullName, profile_pic, about_me, profession, category } =
+      req.body;
+    const user = await User.findById(user_id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({
+          message: "user not found,check user is exist!",
+          success: false,
+        });
+    }
+
+    const userObject = {
+      fullName,
+      profile_pic,
+      about_me,
+      profession,
+      category,
+    };
+    const updatedUser = await User.findByIdAndUpdate(user_id, userObject);
+    // console.log(updatedUser);
+    return res
+      .status(200)
+      .json({
+        message: "user updated successfully!",
+        success: true,
+        // updatedUser,
+      });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "server error", success: false });
+  }
+};

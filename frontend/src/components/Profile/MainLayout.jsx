@@ -1,10 +1,11 @@
 // import { Link } from "react-router-dom";
+import axios from "axios";
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 
 export default function MainLayout() {
   const [selectedlink, setselectedlink] = useState(1);
-
+  const user= JSON.parse(localStorage.getItem("user"));
   const handleSelectlink = (idx) => {
     setselectedlink(idx);
 
@@ -22,7 +23,7 @@ export default function MainLayout() {
             alt="profile"
           />
           <div>
-            <p className="font-semibold">Sophia</p>
+            <p className="font-semibold">{user.name}</p>
             <p className="text-sm text-gray-400">Product Designer</p>
           </div>
         </div>
