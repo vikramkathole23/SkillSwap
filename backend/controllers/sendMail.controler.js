@@ -29,7 +29,7 @@ const sendMail = async (toMail, subject, code, userName) => {
 
 
     let mailOptions = {
-      from: "SkillSwap <teamskillswap12@gmail.com>",
+      from: "SkillSwap  <no-reply@skillswap.in>",
       to: toMail,
       subject: subject,
       html,

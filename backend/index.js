@@ -27,7 +27,7 @@ const Port = process.env.PORT;
 const app = express();
 const server = createServer(app);
 // const allowedOrigins = process.env.Frontend_URL;
-const allowedOrigins = [
+const allowedOrigins = [ 
   process.env.FRONTEND_URL_1,
   process.env.FRONTEND_URL_2,
 ]
