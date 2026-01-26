@@ -13,7 +13,7 @@ export default function MainLayout() {
   const selected = " selected";
 
   return (
-    <div className="flex bg-[#21364A] w-full fixed  top-[60px]  min-h-screen text-white">
+    <div className="profile-main flex bg-[#21364A] w-full fixed  top-[60px]  min-h-screen text-white">
       {/* Sidebar */}
       <aside className="w-64 bg-[#1e293b] p-5 space-y-6">
         <div className="flex items-center gap-3">
@@ -22,7 +22,7 @@ export default function MainLayout() {
             className="w-12 h-12 rounded-full"
             alt="profile"
           />
-          <div>
+          <div className="main-user-name">
             <p className="font-semibold">{user.name}</p>
             <p className="text-sm text-gray-400">Product Designer</p>
           </div>

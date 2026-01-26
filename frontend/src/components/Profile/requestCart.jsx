@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar } from "lucide-react";
 import Picker from "rc-picker";
 import "rc-picker/assets/index.css";
@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-
+import countDownTimer from "../../../../backend/countDownTimer";
 // dayjs + config for rc-picker
 import dayjs from "dayjs";
 import generateConfig from "rc-picker/lib/generate/dayjs";
@@ -34,6 +34,12 @@ function RequestCard({ data, onAccept, onReject }) {
   dateStyle: "medium",
   timeStyle: "short",
 });
+  // const 
+
+  // useEffect(()=>{
+  //   const timer = countDownTimer(date);
+  //   console.log(timer)
+  // },[])
   return (
     <div className="flex items-center gap-4 p-4 bg-gray-800/40 backdrop-blur-md rounded-2xl border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 mr-4">
       {/* Profile Image */}

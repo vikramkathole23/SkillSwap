@@ -16,31 +16,6 @@ function HomePage() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
-  // useEffect(() => {
-  //   const verifyCookie = async () => {
-  //     if (!cookies.token) {
-  //       navigate("/login");
-  //     }
-  //     const { data } = await axios.post(
-  //       "http://localhost:3000",
-  //       {},
-  //       { withCredentials: true }
-  //     );
-  //     const { status, user } = data;
-  //     setUsername(user);
-  //     return status
-  //       ? toast(`Hello ${user}`, {
-  //           position: "top-right",
-  //         })
-  //       : (removeCookie("token"), navigate("/login"));
-  //   };
-  //   verifyCookie();
-  // }, [cookies, navigate, removeCookie]);
-  // const Logout = () => {
-  //   removeCookie("token");
-  //   navigate("/signup");
-  // };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,15 +33,24 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    socket.connect();
+    // socket.connect();
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user?._id) {
-      socket.emit("register", user._id);
-    }
+    socket.on("connect", () => {
+      console.log("Socket connected:", socket.id);
 
-    socket.on("new_request", (data) => {
-      console.log("Notification received:", data);
-      toast.success(data?.message);
+      if (user?._id) {
+        socket.emit("register", user._id);
+      }
+      // console.log(user);
+
+      socket.on("new_request", (data) => {
+        console.log("Notification received:", data);
+        toast.success(data?.message);
+      });
+      // return () => {
+      //   socket.off("new_request");
+      //   socket.off("connect");
+      // };
     });
   }, []);
 

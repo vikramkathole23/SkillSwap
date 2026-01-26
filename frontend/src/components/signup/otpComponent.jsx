@@ -82,8 +82,8 @@ function OTPVerification() {
         setLoading(false)
       }
     } catch (error) {
-      toast.error(error.response.data.message)
-      console.log(error.response.data);
+      toast.error(error.response.data.message||error.message)
+      console.log(error);
     }
   }
 

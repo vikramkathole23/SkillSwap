@@ -4,4 +4,5 @@ import server from "../../production";
 export const socket = io(server, {
     transports: ["websocket"],
     autoConnect: true,
+    withCredentials: true,
   });

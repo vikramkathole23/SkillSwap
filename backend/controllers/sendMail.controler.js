@@ -24,7 +24,7 @@ const sendMail = async (toMail, subject, code, userName) => {
         pass: process.env.BREVO_API_KEY,
       },
     });
-    // await transporter.verify();
+    await transporter.verify();
 // console.log(transporter);
 
 

@@ -1,3 +1,4 @@
+import countDownTimer from "../countDownTimer.js";
 import meeting from "../models/meetindSchedule.model.js";
 import request from "../models/request.model.js";
 import connectToSocket from "../sockets/index.socket.js";
@@ -19,7 +20,7 @@ export const sendSwapRequest = async (req, res) => {
       receiver: receiverId,
       skillId,
     });
-    // console.log(Request);
+    // console.log(countDownTimer());
     
     io.to(receiverId.toString()).emit("new_request", {
       message: "You received a new skill swap request!",
@@ -27,7 +28,7 @@ export const sendSwapRequest = async (req, res) => {
       skillId,
     });
     console.log(receiverId )
-    res.status(201).json(Request);
+    res.status(200).json(Request);
   } catch (error) {
     console.error(error);
     res.status(500).json("Error sending request",error);
@@ -37,6 +38,7 @@ export const sendSwapRequest = async (req, res) => {
 export const getUserRequests = async (req, res) => {
   try {
     const { id } = req.params;
+    // console.log("find user request id:",req)
     const Requests = await request
       .find({ receiver: id })
       .populate("sender","-password -skills -createdAt -updatedAt")
@@ -65,7 +67,8 @@ export const updateRequestStatus = async (req, res) => {
     } else if (Request.status === "accepted") {
       return res.status(404).json("you already accepted this request!")
     }
-    // console.log(stringDate);
+    
+    // console.log(S);
     
     Request.meetingDate = stringDate;
     Request.status = status;

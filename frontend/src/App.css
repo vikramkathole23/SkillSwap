@@ -264,6 +264,89 @@ p {
   .box-btn {
     margin-left: 0 !important;
   }
+
+  /* for main section profile */
+
+   .profile-main {
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    padding: 0;
+  }
+
+  aside {
+    width: 100% !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  aside .main-user-name{
+    display: none;
+  }
+
+  aside nav {
+    width: 100%;
+  }
+
+  .layout-links {
+    display: flex;
+    justify-content: space-around;
+    gap: 2px;
+
+  }
+
+  .layout-links p {
+    font-size: 14px;
+    
+  }
+
+  main {
+    width: 100%;
+    height: auto;
+  }
+
+  . /* Main Card */
+  .request-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Profile Image */
+  .request-card img {
+    width: 60px;
+    height: 60px;
+    align-self: center;
+  }
+
+  /* Content */
+  .request-content {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Buttons */
+  .request-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .request-buttons button {
+    width: 100%;
+  }
+
+  /* Calendar icon */
+  .calendar-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  
+  .request-page{
+    padding: 5px;
+  }
 }
 
 /*  MOBILE (480px & below)  */
@@ -306,6 +389,11 @@ p {
 
   .Box-image {
     height: 150px;
+  }
+
+  /* profile deteil main */
+  .profile-main aside {
+    /* display: hidden; */
   }
 
   

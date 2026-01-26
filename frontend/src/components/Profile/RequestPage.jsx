@@ -10,38 +10,38 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import server from "../../../production";
 
-const requestsData = {
-  accepted: [
-    {
-      name: "Ethan",
-      topic: "Advanced UI Design Techniques",
-      date: "Tuesday, July 23, 2024",
-      time: "10:00 AM – 11:00 AM",
-      status: "Accepted",
-      avatar: "https://randomuser.me/api/portraits/men/12.jpg",
-    },
-  ],
-  pending: [
-    {
-      name: "Olivia",
-      topic: "Agile Project Management",
-      date: "Wednesday, July 24, 2024",
-      time: "2:00 PM – 3:00 PM",
-      status: "Pending",
-      avatar: "https://randomuser.me/api/portraits/women/22.jpg",
-    },
-  ],
-  rejected: [
-    {
-      name: "Noah",
-      topic: "Data Visualization Best Practices",
-      date: "Thursday, July 25, 2024",
-      time: "4:00 PM – 5:00 PM",
-      status: "Rejected",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    },
-  ],
-};
+// const requestsData = {
+//   accepted: [
+//     {
+//       name: "Ethan",
+//       topic: "Advanced UI Design Techniques",
+//       date: "Tuesday, July 23, 2024",
+//       time: "10:00 AM – 11:00 AM",
+//       status: "Accepted",
+//       avatar: "https://randomuser.me/api/portraits/men/12.jpg",
+//     },
+//   ],
+//   pending: [
+//     {
+//       name: "Olivia",
+//       topic: "Agile Project Management",
+//       date: "Wednesday, July 24, 2024",
+//       time: "2:00 PM – 3:00 PM",
+//       status: "Pending",
+//       avatar: "https://randomuser.me/api/portraits/women/22.jpg",
+//     },
+//   ],
+//   rejected: [
+//     {
+//       name: "Noah",
+//       topic: "Data Visualization Best Practices",
+//       date: "Thursday, July 25, 2024",
+//       time: "4:00 PM – 5:00 PM",
+//       status: "Rejected",
+//       avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+//     },
+//   ],
+// };
 
 function MySessionsPage() {
   const [tab, setTab] = useState("incoming");
@@ -61,10 +61,13 @@ function MySessionsPage() {
         return toast.error("you are not login!");
       }
       try {
+        console.log(server);
+        
         const res = await axios.get(
-          `${server}user/requests/${user._id}`
+          `${server}/user/requests/${user._id}`
         );
-
+        console.log(res);
+        
         const data = res.data;
 
         const p = [];
@@ -158,14 +161,14 @@ function MySessionsPage() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-8  request-page">
       <h1 className="text-2xl font-bold">Requests</h1>
       <p className="text-gray-400 mb-4">
         Manage your incoming and outgoing requests
       </p>
 
       {/* Tabs */}
-      <div className="flex gap-6 border-b border-gray-700 mb-6">
+      <div className="flex justify-center items-center gap-6 border-b border-gray-700 mb-6">
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
