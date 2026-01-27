@@ -42,7 +42,7 @@ function App() {
         <Route path="/my-swap" element={<SwapPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/signup/verify-email" element={<OTPVerification />} />
+        {/* <Route path="/signup/verify-email" element={<OTPVerification />} /> */}
         <Route
           path="/addnewskill"
           element={

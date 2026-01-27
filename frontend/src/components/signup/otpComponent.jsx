@@ -30,7 +30,6 @@ function OTPVerification() {
       const response = await axios.post(
         `${server}/user/signup/verify-email`,
         { email,code },
-        
         {
           withCredentials: true,
           headers: {
@@ -93,7 +92,7 @@ function OTPVerification() {
     <Loader />
   ) : (
     <div className="Login-container flex justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-      <div className="flex flex-col text-center my-10 w-[500px] items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-lg">
+      <div className="flex flex-col text-center my-10 w-[500px]  h-[400px] m-[20px] items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-lg">
         <h1 className="text-3xl font-bold text-white mb-4">Join SkillSwap</h1>
 
         <div className="Login-formcontainer text-start w-full">

@@ -67,7 +67,7 @@ function LoginPage() {
          if (error.response?.data?.message ==="Email is not verify,Please verify first!"||"Please,Verify your Email!") {
           // console.log();
           
-          navigate("/signup/verify-email")
+          navigate("/login")
          } else{
           toast.error( error.response?.data?.message 
            || "Something went wrong.")

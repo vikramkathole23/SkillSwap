@@ -32,14 +32,14 @@ export const registerUser = async (req, res) => {
     newUser.password = await bcrypt.hash(password, 10);
 
     // create a opt
-    const otp = Math.floor(1000 + Math.random() * 9000);
-    console.log(otp);
+    // const otp = Math.floor(1000 + Math.random() * 9000);
+    // console.log(otp);
 
     // send mail for verifying user Email
-    sendMail(newUser.email, "verify your account", otp, fullName);
+    // sendMail(newUser.email, "verify your account", otp, fullName);
 
     // otp save in db
-    newUser.otp = otp;
+    // newUser.otp = otp;
 
     // save user in db
     await newUser.save();
@@ -62,7 +62,7 @@ export const resendOtp = async (req, res) => {
         .status(201)
         .json({ message: "Please,Enter your Register Email!", success: true });
     }
-    // console.log(req);
+    console.log(req);
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -143,12 +143,12 @@ export const LoginUser = async (req, res) => {
       });
     }
     const errMessage = "Auth faild email or password wrong";
-    if (!findUser.isVerify) {
-      return res.status(403).json({
-        message: "Email is not verify,Please verify first!",
-        success: false,
-      });
-    }
+    // if (!findUser.isVerify) {
+    //   return res.status(403).json({
+    //     message: "Email is not verify,Please verify first!",
+    //     success: false,
+    //   });
+    // }
     const isPassEquale = await bcrypt.compare(password, findUser.password);
     if (!isPassEquale) {
       return res.status(403).json({ message: errMessage, success: false });

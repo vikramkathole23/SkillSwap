@@ -308,7 +308,7 @@ p {
     height: auto;
   }
 
-  . /* Main Card */
+   /* Main Card */
   .request-card {
     flex-direction: column;
     align-items: flex-start;

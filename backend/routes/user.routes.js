@@ -2,19 +2,19 @@ import { Router } from "express";
 import { LoginUser, registerUser,getUserDetail, LogoutUser, verifyEmail, resendOtp, editUserDeteil, } from "../controllers/user.controller.js";
 import {signupValidation,loginValidation} from "../validateSchema/authValidation.js" 
 import { getUserRequests } from "../controllers/skillSwapRequest.js";
-import { IsEmailVerify } from "../middleware/EmailVerifyMiddleware.js";
+// import { IsEmailVerify } from "../middleware/EmailVerifyMiddleware.js";
 // import user from "../models/user.model.js"
 
 const router = Router();
 
 router.route("/signup")
     .post(signupValidation,registerUser) // Register New User
-router.route("/signup/verify-email")
-    .post(verifyEmail)
-router.route("/signup/verify-otp/resend-otp")
-    .post(resendOtp)
+// router.route("/signup/verify-email")
+//     .post(verifyEmail)
+// router.route("/signup/verify-otp/resend-otp")
+//     .post(resendOtp)
 router.route("/login")
-    .post(loginValidation,IsEmailVerify,LoginUser)      // Login user
+    .post(loginValidation,LoginUser)      // Login user
 router.route("/requests/:id")
     .get(getUserRequests)
 router.route("/:id")

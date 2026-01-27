@@ -44,7 +44,7 @@ function SignUpPage() {
       if (success) {
         toast.success(message);
         setTimeout(() => {
-          navigate("/signup/verify-email");
+          navigate("/login");  
         }, 1000);
       } 
     } catch (error) {
