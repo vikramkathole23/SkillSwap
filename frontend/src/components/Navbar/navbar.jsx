@@ -86,8 +86,11 @@ function Navbar() {
                   Add New Skill
                 </li>
               </Link>
-              {/* <li className='links'>My Swap</li> */}
+              <Link to="/user/:id/chat" onClick={() => handleselectedlinks(3)}>
               <li className="links">Messages</li>
+              </Link>
+              {/* <li className='links'>My Swap</li> */}
+              
             </ul>
           </div>
           <div className="nav-right flex justify-center items-center gap-8">

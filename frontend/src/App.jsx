@@ -68,7 +68,7 @@ function App() {
           }
         />
         <Route path="/account/user/:id" element={<UserProfile />} />
-        {/* <Route path="/home/user/:id/chat" element={<UserProfile />} /> */}
+        <Route path="/home/user/:id/chat" element={<UserProfile />} />
         <Route path="/user/:id/chat" element={<ChatPage />} />
         <Route
           path="skillSwap-video-call/stream/:url"

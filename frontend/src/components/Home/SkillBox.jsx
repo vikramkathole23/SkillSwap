@@ -92,8 +92,8 @@ function SkillBox({ data, sceleton }) {
     }
   };
 
-  const sendMassege = (id)=>{
-    navigate(`/home/user/${id}/chat`)
+  const sendMassege = (id) => {
+    navigate(`/user/${id}/chat`)
   }
 
   return (

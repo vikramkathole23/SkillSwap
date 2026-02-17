@@ -12,7 +12,7 @@ export const sendSwapRequest = async (req, res) => {
       return res.status(500).json("you cannot send request to yourself!");
     }
     if (!io) {
-     console.log("IO NOT FOUND");
+      console.log("IO NOT FOUND");
       return res.status(500).json("Socket not initialized");
     }
     const Request = await request.create({
@@ -21,17 +21,17 @@ export const sendSwapRequest = async (req, res) => {
       skillId,
     });
     // console.log(countDownTimer());
-    
+
     io.to(receiverId.toString()).emit("new_request", {
       message: "You received a new skill swap request!",
       senderId,
       skillId,
     });
-    console.log(receiverId )
+    console.log(receiverId);
     res.status(200).json(Request);
   } catch (error) {
     console.error(error);
-    res.status(500).json("Error sending request",error);
+    res.status(500).json("Error sending request", error);
   }
 };
 
@@ -41,47 +41,51 @@ export const getUserRequests = async (req, res) => {
     // console.log("find user request id:",req)
     const Requests = await request
       .find({ receiver: id })
-      .populate("sender","-password -skills -createdAt -updatedAt")
+      .populate("sender", "-password -skills -createdAt -updatedAt")
       .populate("skillId");
 
     res.status(201).json(Requests);
   } catch (error) {
     console.error(error);
-    res.status(500).json("Error getUserRequest:",error);
+    res.status(500).json("Error getUserRequest:", error);
   }
 };
 
 export const updateRequestStatus = async (req, res) => {
   try {
-    const {id} = req.params;
-    const {status,stringDate}=req.body;
+    const { id } = req.params;
+    const { status, stringDate } = req.body;
     const io = req.app.get("io");
+    const date = stringDate.toLocaleString("en-IN", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
     if (!io) {
-     console.log("IO NOT FOUND");
+      console.log("IO NOT FOUND");
       return res.status(500).json("Socket not initialized");
     }
-    
+
     const Request = await request.findById(id);
     if (!Request) {
-      return res.status(404).json("request not found!")
+      return res.status(404).json("request not found!");
     } else if (Request.status === "accepted") {
-      return res.status(404).json("you already accepted this request!")
+      return res.status(404).json("you already accepted this request!");
     }
-    
-    // console.log(S);
-    
+
+    // console.log(countDownTimer(date));
+
     Request.meetingDate = stringDate;
     Request.status = status;
     const result = await Request.save();
-    
+
     const meetingObj = {
-    requestId: id,
-    meetingTime: new Date(stringDate),
-    trainer: Request.sender,   
-    learner: Request.receiver,
-  };
-    
-    const createMeeting = await meeting.create(meetingObj)
+      requestId: id,
+      meetingTime: new Date(stringDate),
+      trainer: Request.sender,
+      learner: Request.receiver,
+    };
+
+    const createMeeting = await meeting.create(meetingObj);
     io.to(Request.sender._id.toString()).emit("new_request", {
       message: `Your request accepted!`,
       createMeeting,
@@ -90,6 +94,6 @@ export const updateRequestStatus = async (req, res) => {
     return res.status(201).json(createMeeting);
   } catch (error) {
     console.error(error);
-    res.status(500).json("Error updateRequest:",error);
+    res.status(500).json("Error updateRequest:", error);
   }
 };

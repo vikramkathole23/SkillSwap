@@ -30,16 +30,16 @@ function RequestCard({ data, onAccept, onReject }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const isoDate = data.meetingDate;
   const date = new Date(isoDate);
+  
   const readableDate = date.toLocaleString("en-IN", {
   dateStyle: "medium",
   timeStyle: "short",
-});
-  // const 
+  }); 
 
   // useEffect(()=>{
-  //   const timer = countDownTimer(date);
-  //   console.log(timer)
-  // },[])
+  //   const timer = countDownTimer( readableDate);
+  //   // console.log(readableDate)
+  // },[data])
   return (
     <div className="flex items-center gap-4 p-4 bg-gray-800/40 backdrop-blur-md rounded-2xl border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 mr-4">
       {/* Profile Image */}

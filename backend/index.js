@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import multer from "multer";
 import skillRouter from "./routes/skill.routes.js";
 import userRouter from "./routes/user.routes.js"
+import messageRouter from "./routes/message.route.js"
 import User from "./models/user.model.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
@@ -73,6 +74,9 @@ app.use(session(sessionOptions))
  
 // Skill routes 
 app.use("/skill",skillRouter)
+
+// chat message 
+app.use("/api",messageRouter)
 
 // User Route
 app.use("/user",userRouter)

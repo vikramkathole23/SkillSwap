@@ -496,6 +496,8 @@ export default function VideoMeetComponent() {
       ...prevMessages,
       { sender: sender, data: data },
     ]);
+    console.log(messages);
+    
     if (socketIdSender !== socketIdRef.current) {
       setNewMessages((prevNewMessages) => prevNewMessages + 1);
     }

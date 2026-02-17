@@ -53,7 +53,8 @@ const connectToSocket = (io) => {
           if (!isFound && roomValue.includes(socket.id)) {
             return [roomKey, true];
           }
-
+          // console.log(data);
+          
           return [room, isFound];
         },
         ["", false],
