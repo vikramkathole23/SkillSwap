@@ -17,6 +17,8 @@ import ioConnection from './sockets/index.socket.js';
 import Frontend_URL from './production.js';
 import path from "path";
 import { fileURLToPath } from "url";
+// import multer from 'multer';
+import cloudinary from 'cloudinary'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

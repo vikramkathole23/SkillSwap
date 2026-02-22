@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 
 const isAuthenticate = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  // console.log(req);
+  // const data = req.body
+  // console.log(data);
   
   if(!authHeader) {
     return res.status(403)
@@ -24,6 +25,8 @@ const isAuthenticate = (req, res, next) => {
     next();
    } catch (error) {
     if (error) {
+       console.log(error);
+       
       return res.status(403)
         .json('Unauthorized, JWT token is wrong or expired')
     }

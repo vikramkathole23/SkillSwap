@@ -43,7 +43,7 @@ export default function MainLayout() {
             </Link>
             <Link to="/main/addnewskill"onClick={()=>handleSelectlink(3)}>
             
-              <p className={selectedlink === 3 ? selected : ""}>Add New Skills</p>
+              {/* <p className={selectedlink === 3 ? selected : ""}>Add New Skills</p> */}
             </Link>
             {/* <Link to="/home"><li className="aside-links links">Settings</li></Link> */}
           </ul>

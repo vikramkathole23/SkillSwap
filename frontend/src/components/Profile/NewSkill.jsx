@@ -9,15 +9,23 @@ function AddNewSkill() {
   // const user = localStorage.getItem("loginUser");
   // const user = JSON.parse(localStorage.getItem("loginUser"));
   const storedUser = localStorage.getItem("user");
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState("");
+
   const user = storedUser ? JSON.parse(storedUser) : null;
   if (!user) {
     return <p>User not logged in</p>;
   }
-  console.log(user);
+  // console.log(user);
 
   const [formData, setFormData] = useState({
-    user: user._id,
+    // user: user._id,
   });
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    setPreview(URL.createObjectURL(e.target.files[0]));
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -34,24 +42,37 @@ function AddNewSkill() {
         toast.error("You are not Logged in! Please Login First");
         return navigate("/login");
       }
+
+      // for image uploader
+      const data = new FormData();
+      data.append("skillName", formData.skillName);
+      data.append("description", formData.description);
+      data.append("profession", formData.profession);
+      data.append("proficiency", formData.proficiency);
+      data.append("category", formData.category);
+      data.append("user", user._id);
+      data.append("image", file);
+      // data.append("image", file);
+
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          authorization: `Bearer ${token}`,
         },
       };
       const res = await axios.post(
         `${server}/skill/newskill`,
-        formData,
-        config
+        data,
+        config,
+        // formData,
       );
-      console.log(res);
+      console.log(data);
       navigate("/", {
         state: { msg: "Skill updated successfully!" },
         replace: true,
       });
       toast.success(res.data.message);
     } catch (error) {
-      console.log("new post request:", error);
+      // console.log("new post request:", error);
       toast.error(error.response.data);
     }
   };
@@ -89,7 +110,7 @@ function AddNewSkill() {
             </div>
 
             {/* <!-- Image Upload --> */}
-            <div>
+            {/* <div>
               <label for="URL" class="block text-gray-300 mb-2">
                 Skill URL:
               </label>
@@ -102,6 +123,22 @@ function AddNewSkill() {
                 required
                 class="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-600 text-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500 outline-none"
               />
+            </div> */}
+
+            {/* <div style={{ padding: 20 }}>
+              <h2>Upload a File</h2>
+              <input type="file" onChange={handleFileChange} />
+              {preview && <img src={preview} alt="preview" width="200" />}
+              <br />
+            </div> */}
+            <div>
+              <label for="URL" class="block text-gray-300 mb-2">
+                Skill URL:
+              </label>
+              <div id="URL" className="w-full  border border-dashed border-gray-500 p-6 rounded-lg text-center text-gray-400 cursor-pointer">
+                <input className="cursor-pointer w-full h-full" type="file" onChange={handleFileChange} />
+                {preview && <img src={preview} alt="preview" width="200" />}
+              </div>
             </div>
 
             {/* <!-- Description --> */}

@@ -5,7 +5,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import TabButton from "./TabButton";
-
+import NotesShowcase from "./notesShowCase";
 const skillsData = {
   learn: [
     {
@@ -58,6 +58,8 @@ export default function SwapPage() {
               <TabList onChange={handleChange} aria-label="Skill Tabs">
                 <Tab value="1" label={<TabButton label="I Learned" />} />
                 <Tab value="2" label={<TabButton label="I Taught" />} />
+                <Tab value="3" label={<TabButton label="Notes" />} />
+                
               </TabList>
             </Box>
             <TabPanel value="1">
@@ -85,6 +87,9 @@ export default function SwapPage() {
                   />
                 ))}
               </div>
+            </TabPanel>
+            <TabPanel value="3">
+              <NotesShowcase/>
             </TabPanel>
           </TabContext>
         </Box>

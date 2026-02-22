@@ -118,7 +118,7 @@ function SkillDialogBox({ handleClose, isOpen, isLoading, data }) {
                     ) : (
                       <img
                         className="h-full w-full object-cover rounded-lg"
-                        src={data.image}
+                        src={data.image?.url}
                         alt="img"
                       />
                     )}

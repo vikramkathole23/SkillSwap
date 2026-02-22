@@ -22,6 +22,7 @@ import VideoMeetComponent from "./components/videoStream/videoMeetPage";
 import OTPVerification from "./components/signup/otpComponent";
 import ProtectedRoute from "./routProtecterMeddelware";
 import EditUserDeteil from "./components/Profile/EditUserProfileDeteils";
+import AddNotesAndAssignmentForm from "./components/MySwap/addNotesAndAssignmentForm";
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/my-swap" element={<SwapPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/addnotes" element={<AddNotesAndAssignmentForm />} />
         {/* <Route path="/signup/verify-email" element={<OTPVerification />} /> */}
         <Route
           path="/addnewskill"

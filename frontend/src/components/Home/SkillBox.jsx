@@ -34,6 +34,8 @@ function SkillBox({ data, sceleton }) {
       const res = await axios.get(`${server}/skill/${data._id}`);
       setskillData(res.data);
       setLoading(false)
+      console.log(data);
+      
     } catch (error) {
       console.error(error);
     }
@@ -81,7 +83,7 @@ function SkillBox({ data, sceleton }) {
         config
       );
       // console.log(data._id);
-      navigate("/home", {
+      navigate("/", {
         state: { msg: "Skill deleted successfully! " },
         replace: true,
       });
@@ -182,7 +184,7 @@ function SkillBox({ data, sceleton }) {
               <div className="Box-image h-[200px]">
                 <img
                   className="h-full "
-                  src={data.image}
+                  src={data.image?.url}
                   alt="img"
                 />
               </div>

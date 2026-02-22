@@ -9,8 +9,8 @@ const skillSchema = new Schema(
       trim: true,
     },
     image: {
-      type: String, 
-      required: false,
+      url: String,
+      filename: String,
     },
     profession: {
       type: String,

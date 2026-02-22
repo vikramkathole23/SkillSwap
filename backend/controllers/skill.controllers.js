@@ -1,5 +1,7 @@
 import skill from "../models/skill.model.js";
+import studymaterial from "../models/studymaterials.model.js";
 import User from "../models/user.model.js";
+// import {storage} from "../cloudinaryConfig.js"
 // import expressError from "../utils/expressError";
 
 export const showSkill = async (req, res) => {
@@ -25,8 +27,9 @@ export const showSkill = async (req, res) => {
 export const createSkill = async (req, res) => {
   try {
     const {user} = req.body;
-    const skillData = req.body;
-
+    const data = req.body;
+    console.log(data);
+    
     // find user by id
     const findUser = await User.findById(user);    
 
@@ -36,7 +39,7 @@ export const createSkill = async (req, res) => {
     }
    
     // add skill in db
-    const addSkill = await skill.create(skillData);
+    const addSkill = await skill.create(data);
 
     // if not skill array in finduser create an array 
     if (!findUser.skills) {
@@ -99,3 +102,36 @@ export const deleteSkill = async (req, res) => {
     res.status(500).json({ message: "Server error" }, error);
   }
 };
+
+export const UpaloadStudyMaterial = async (req , res ) => {
+  try {
+    // const {data} = req.body;
+    // console.log(req.body);
+
+    const fileData = {
+      
+      title: req.body.title,
+      description: req.body.description,
+      subject: req.body.subject,
+      type: req.body.type,
+      deadline: req.body.deadline || null,
+      user: req.body.user,
+      file: req.body.file,   
+    
+    }
+
+    const saveData = await studymaterial.create(fileData);
+
+    // console.log(saveData)
+    //and save it
+    await saveData.save();
+    // then return 
+    return res.status(201).json({message:"Notes Upload successfully."});
+    // return res.status(200).json({ message: "uploaded successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" },error);
+  }
+}
+
+
