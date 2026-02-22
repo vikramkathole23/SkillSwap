@@ -86,7 +86,7 @@ function Navbar() {
                   Add New Skill
                 </li>
               </Link>
-              <Link to="/addnotes" onClick={() => handleselectedlinks(3)}>
+              <Link to="/uploadnotes" onClick={() => handleselectedlinks(3)}>
               <li className="links">Add Notes</li>
               </Link>
               <Link to="/skillswap-video-call/stream/123" onClick={() => handleselectedlinks(3)}>

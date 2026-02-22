@@ -79,7 +79,7 @@ function NotesShowcase(){
   );
 
   return (
-    <div className="min-h-screen bg-gray-900 p-8">
+    <div className="min-h-screen max-w-full bg-gray-900 p-8">
       <h1 className="text-4xl text-white font-bold mb-6 text-center">
         Notes & Assignments
       </h1>

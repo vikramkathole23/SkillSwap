@@ -66,10 +66,18 @@ export default function NavbarManu({isOpen,handleClose,logout}) {
 
         <MenuItem
           component={Link}
-          to="/main/my-sessions"
+          to="/my-swap"
           onClick={handleClose}
         >
           My Swaps
+        </MenuItem>
+
+        <MenuItem
+          component={Link}
+          to="/main"
+          onClick={handleClose}
+        >
+          profile
         </MenuItem>
 
         <MenuItem
@@ -78,6 +86,14 @@ export default function NavbarManu({isOpen,handleClose,logout}) {
           onClick={handleClose}
         >
           Add New Skill
+        </MenuItem>
+
+        <MenuItem
+          component={Link}
+          to="/uploadnotes"
+          onClick={handleClose}
+        >
+          Add Note & Assignment
         </MenuItem>
 
         <Divider sx={{ bgcolor: "#1e293b", my: 1 }} />
