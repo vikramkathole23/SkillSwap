@@ -2,12 +2,13 @@
 export const UploadMulterFile = (req, res, next) => {
   try {
     if (!req.file) return next();
-
+    // console.log(req);
+    
     const isImage = req.file.mimetype.startsWith("image/");
     const isPDF = req.file.mimetype === "application/pdf";
 
     req.body.file = {
-      url: req.file.path,        // Cloudinary secure_url
+      url: req.file.path,        
       filename: req.file.filename,
       resourceType: req.file.mimetype,
       format: isImage ? "image" : isPDF ? "pdf" : "file",
@@ -15,7 +16,7 @@ export const UploadMulterFile = (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json("File processing error");
   }
 };

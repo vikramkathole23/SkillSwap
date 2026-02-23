@@ -18,6 +18,7 @@ import {
 import { upload } from "../cloudinaryConfig.js";
 import multer from "multer";
 import { UploadMulterFile } from "../middleware/cloudinaryMiddlleware.js";
+import { addNewSkillSchemaValidation } from "../validateSchema/skillValidation.js";
 // const upload = multer({ storage });
 
 const router = Router();
@@ -32,6 +33,7 @@ router
     isAuthenticate,
     upload.single("image"),
     UploadMulterFile,
+    addNewSkillSchemaValidation,
     wrapAsync(createSkill),
   );
 

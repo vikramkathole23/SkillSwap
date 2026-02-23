@@ -19,6 +19,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 // import multer from 'multer';
 import cloudinary from 'cloudinary'
+import { log } from 'console';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -95,6 +96,7 @@ app.use("/user",userRouter)
 // error handlemiddleware 
 app.use((err,req,res,next)=>{
   const {statusCode=500,message="something went wrong"}=err
+  console.log(err)
   res.status(statusCode).json(message)
 })
 

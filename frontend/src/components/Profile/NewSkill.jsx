@@ -72,8 +72,8 @@ function AddNewSkill() {
       });
       toast.success(res.data.message);
     } catch (error) {
-      // console.log("new post request:", error);
-      toast.error(error.response.data);
+      console.log("new post request:", error);
+      toast.error(error.data.message);
     }
   };
 
@@ -95,7 +95,7 @@ function AddNewSkill() {
           >
             {/* <!-- Skill Name --> */}
             <div>
-              <label for="skillName" class="block text-gray-300 mb-2">
+              <label htmlFor="skillName" class="block text-gray-300 mb-2">
                 What's you want to Teach?
               </label>
               <input
@@ -132,10 +132,10 @@ function AddNewSkill() {
               <br />
             </div> */}
             <div>
-              <label for="URL" class="block text-gray-300 mb-2">
+              <label htmlFor="image" class="block text-gray-300 mb-2">
                 Skill URL:
               </label>
-              <div id="URL" className="w-full  border border-dashed border-gray-500 p-6 rounded-lg text-center text-gray-400 cursor-pointer">
+              <div id="image" className="w-full  border border-dashed border-gray-500 p-6 rounded-lg text-center text-gray-400 cursor-pointer">
                 <input className="cursor-pointer w-full h-full" type="file" onChange={handleFileChange} />
                 {preview && <img src={preview} alt="preview" width="200" />}
               </div>
@@ -143,7 +143,7 @@ function AddNewSkill() {
 
             {/* <!-- Description --> */}
             <div>
-              <label for="description" class="block text-gray-300 mb-2">
+              <label htmlFor="description" class="block text-gray-300 mb-2">
                 Description:
               </label>
               <textarea
@@ -159,7 +159,7 @@ function AddNewSkill() {
 
             {/* <!-- Profession --> */}
             <div>
-              <label for="profession" class="block text-gray-300 mb-2">
+              <label htmlFor="profession" class="block text-gray-300 mb-2">
                 What is your profession?
               </label>
               <select
@@ -182,7 +182,7 @@ function AddNewSkill() {
 
             {/* <!-- Proficiency Level --> */}
             <div>
-              <label for="proficiency" class="block text-gray-300 mb-2">
+              <label htmlFor="proficiency" class="block text-gray-300 mb-2">
                 Proficiency Level:
               </label>
               <select
@@ -203,7 +203,7 @@ function AddNewSkill() {
 
             {/* <!-- Category --> */}
             <div>
-              <label for="category" class="block text-gray-300 mb-2">
+              <label htmlFor="category" class="block text-gray-300 mb-2">
                 Category:
               </label>
               <select

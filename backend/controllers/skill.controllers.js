@@ -17,7 +17,7 @@ export const showSkill = async (req, res) => {
 
   res.json(safeSkills);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     
     res.status(500).json({ message: "Server error" },error);
   }
@@ -28,7 +28,7 @@ export const createSkill = async (req, res) => {
   try {
     const {user} = req.body;
     const data = req.body;
-    console.log(data);
+    // console.log(data);
     
     // find user by id
     const findUser = await User.findById(user);    
@@ -50,10 +50,12 @@ export const createSkill = async (req, res) => {
     findUser.skills.push(addSkill._id);
     //and save it
     await findUser.save();
+    // console.log(addSkill);
+    
     // then return 
     return res.status(201).json({message:"New Skill added."});
   } catch (error) {
-    console.error(error);
+    // console.log(error);
     res.status(500).json({ message: "Server error" }, error);   
   }
 };

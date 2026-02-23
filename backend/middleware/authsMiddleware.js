@@ -25,7 +25,7 @@ const isAuthenticate = (req, res, next) => {
     next();
    } catch (error) {
     if (error) {
-       console.log(error);
+      //  console.log(error);
        
       return res.status(403)
         .json('Unauthorized, JWT token is wrong or expired')

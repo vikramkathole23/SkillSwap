@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { type } from 'os';
 const { Schema } = mongoose;
 
 const skillSchema = new Schema(
@@ -8,9 +9,18 @@ const skillSchema = new Schema(
       required: true,
       trim: true,
     },
-    image: {
-      url: String,
-      filename: String,
+    file: {
+      url: {
+        type :String,
+        required:true
+      },
+      filename:{
+        type :String,
+        required:true
+      },
+      resourceType:String,
+      format: String
+      
     },
     profession: {
       type: String,

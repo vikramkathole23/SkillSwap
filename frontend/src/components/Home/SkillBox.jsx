@@ -184,7 +184,7 @@ function SkillBox({ data, sceleton }) {
               <div className="Box-image h-[200px]">
                 <img
                   className="h-full "
-                  src={data.image?.url}
+                  src={data.file?.url}
                   alt="img"
                 />
               </div>
