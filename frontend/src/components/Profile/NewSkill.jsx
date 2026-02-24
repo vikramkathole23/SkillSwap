@@ -65,15 +65,17 @@ function AddNewSkill() {
         config,
         // formData,
       );
-      console.log(data);
+      // console.log(data);
       navigate("/", {
         state: { msg: "Skill updated successfully!" },
         replace: true,
       });
-      toast.success(res.data.message);
+      // toast.success(res.data.message);
+      toast.success("Skill updated successfully!");
     } catch (error) {
       console.log("new post request:", error);
-      toast.error(error.data.message);
+      // toast.error(error.data.message);
+         toast.error("Server error!")
     }
   };
 
